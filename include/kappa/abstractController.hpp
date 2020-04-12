@@ -14,6 +14,10 @@ class AbstractController : public AbstractOutput<TARGET>{
 public:
   virtual void setTarget(TARGET itarget) = 0;
 
+  virtual void set(TARGET itarget) {
+      setTarget(itarget);
+  }
+
   virtual TARGET getTarget() const {
     return target;
   };
