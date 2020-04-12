@@ -14,7 +14,7 @@ class AbstractController : public AbstractOutput<TARGET>{
 public:
   virtual void setTarget(TARGET itarget) = 0;
 
-  virtual void set(TARGET itarget) {
+  virtual void set(TARGET itarget) override {
       setTarget(itarget);
   }
 
