@@ -14,6 +14,8 @@ public:
 
 protected:
   std::shared_ptr<okapi::AbstractMotor> motor;
+
+  double maxVelocity{0};
 };
 
 }

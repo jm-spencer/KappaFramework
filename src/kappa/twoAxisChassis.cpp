@@ -2,8 +2,8 @@
 
 namespace kappa {
 
-TwoAxisChassis::TwoAxisChassis(std::shared_ptr<AbstractOutput<std::tuple<double,double>>> ichassis, double ichassisWidth):
-  chassis(ichassis), chassisWidth(ichassisWidth) {}
+TwoAxisChassis::TwoAxisChassis(std::shared_ptr<AbstractOutput<std::tuple<double,double>>> ichassis, double ichassisWidth, const std::shared_ptr<okapi::Logger> &ilogger):
+  chassis(ichassis), chassisWidth(ichassisWidth), logger(ilogger) {}
 
 void TwoAxisChassis::set(std::tuple<double,double> iTarget) {
   double rotationTarget = chassisWidth * std::get<1>(iTarget);
