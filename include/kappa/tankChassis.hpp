@@ -1,28 +1,22 @@
 #pragma once
 
 #include "abstractOutput.hpp"
-#include "okapi/api/device/motor/abstractMotor.hpp"
-#include <utility>
+#include <tuple>
+#include <memory>
 
 namespace kappa {
 
-template <typename T>
-class TankChassis : public AbstractOutput<std::pair<T,T>> {
+class TankChassis : public AbstractOutput<std::tuple<double,double>> {
 public:
-  TankChassis(std::shared_ptr<AbstractOutput<T>> ileft, std::shared_ptr<AbstractOutput<T>> iright);
+  TankChassis(std::shared_ptr<AbstractOutput<double>> ileft, std::shared_ptr<AbstractOutput<double>> iright);
 
-  virtual void set(std::pair<T,T> iTarget) override {
-    left->set(iTarget.first);
-    right->set(iTarget.second);
-  }
+  virtual void set(std::tuple<double,double> iTarget) override;
 
-  std::pair<std::shared_ptr<AbstractOutput<T>>, std::shared_ptr<AbstractOutput<T>>> getOutputs() const {
-    return std::make_pair<std::shared_ptr<AbstractOutput<T>>, std::shared_ptr<AbstractOutput<T>>>(left, right);
-  }
+  std::tuple<std::shared_ptr<AbstractOutput<double>>, std::shared_ptr<AbstractOutput<double>>> getOutputs() const;
 
 protected:
-  std::shared_ptr<AbstractOutput<T>> left;
-  std::shared_ptr<AbstractOutput<T>> right;
+  std::shared_ptr<AbstractOutput<double>> left;
+  std::shared_ptr<AbstractOutput<double>> right;
 };
 
 }
