@@ -1,29 +1,24 @@
 #pragma once
 
 #include "abstractOutput.hpp"
-#include <tuple>
+#include <array>
 #include <memory>
 
 namespace kappa {
 
-class StrafeChassis : public AbstractOutput<std::tuple<double,double,double,double>> {
+class StrafeChassis : public AbstractOutput<std::array<double,4>> {
 public:
-  StrafeChassis(std::shared_ptr<AbstractOutput<double>> ifrontLeft, std::shared_ptr<AbstractOutput<double>> ifrontRight,
-                std::shared_ptr<AbstractOutput<double>> ibackLeft, std::shared_ptr<AbstractOutput<double>> ibackRight);
+  StrafeChassis(std::array<std::shared_ptr<AbstractOutput<double>>,4> imotors);
 
   /**
    * Tuple in the format {frontLeft, frontRight, backLeft, backRight}; inherits units from provided outputs
    */
-  virtual void set(std::tuple<double,double,double,double> iTarget) override;
+  virtual void set(std::array<double,4> iTarget) override;
 
-  std::tuple<std::shared_ptr<AbstractOutput<double>>, std::shared_ptr<AbstractOutput<double>>,
-             std::shared_ptr<AbstractOutput<double>>, std::shared_ptr<AbstractOutput<double>>> getOutputs() const;
+  std::array<std::shared_ptr<AbstractOutput<double>>,4> getOutput() const;
 
 protected:
-  std::shared_ptr<AbstractOutput<double>> frontLeft;
-  std::shared_ptr<AbstractOutput<double>> frontRight;
-  std::shared_ptr<AbstractOutput<double>> backLeft;
-  std::shared_ptr<AbstractOutput<double>> backRight;
+  std::array<std::shared_ptr<AbstractOutput<double>>,4> motors;
 };
 
 }

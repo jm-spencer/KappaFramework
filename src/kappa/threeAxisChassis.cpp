@@ -3,7 +3,7 @@
 
 namespace kappa {
 
-ThreeAxisChassis::ThreeAxisChassis(std::shared_ptr<AbstractOutput<std::tuple<double,double,double,double>>> ichassis, double iwheelDiameter, double ichassisWidth):
+ThreeAxisChassis::ThreeAxisChassis(std::shared_ptr<AbstractOutput<std::array<double,4>>> ichassis, double iwheelDiameter, double ichassisWidth):
   chassis(ichassis), linearScalar((30.0 / M_PI) / iwheelDiameter), angularScalar((30.0 / M_PI) * (ichassisWidth / iwheelDiameter)) {}
 
 void ThreeAxisChassis::set(std::tuple<double,double,double> iTarget) {
@@ -11,13 +11,13 @@ void ThreeAxisChassis::set(std::tuple<double,double,double> iTarget) {
   double sidewaysTarget = linearScalar  * std::get<1>(iTarget);
   double rotationTarget = angularScalar * std::get<2>(iTarget);
 
-  chassis->set(std::make_tuple(forwardTarget + sidewaysTarget + rotationTarget,
-                               forwardTarget - sidewaysTarget - rotationTarget,
-                               forwardTarget - sidewaysTarget + rotationTarget,
-                               forwardTarget + sidewaysTarget - rotationTarget));
+  chassis->set({forwardTarget + sidewaysTarget + rotationTarget,
+                forwardTarget - sidewaysTarget - rotationTarget,
+                forwardTarget - sidewaysTarget + rotationTarget,
+                forwardTarget + sidewaysTarget - rotationTarget});
 }
 
-std::shared_ptr<AbstractOutput<std::tuple<double,double,double,double>>> ThreeAxisChassis::getOutput() const {
+std::shared_ptr<AbstractOutput<std::array<double,4>>> ThreeAxisChassis::getOutput() const {
   return chassis;
 }
 

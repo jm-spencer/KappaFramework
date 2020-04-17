@@ -1,25 +1,24 @@
 #pragma once
 
 #include "abstractOutput.hpp"
-#include <tuple>
+#include <array>
 #include <memory>
 
 namespace kappa {
 
-class TankChassis : public AbstractOutput<std::tuple<double,double>> {
+class TankChassis : public AbstractOutput<std::array<double,2>> {
 public:
-  TankChassis(std::shared_ptr<AbstractOutput<double>> ileft, std::shared_ptr<AbstractOutput<double>> iright);
+  TankChassis(std::array<std::shared_ptr<AbstractOutput<double>>,2> imotors);
 
   /**
    * Tuple in the format {left,right}; inherits units from provided outputs
    */
-  virtual void set(std::tuple<double,double> iTarget) override;
+  virtual void set(std::array<double,2> iTarget) override;
 
-  std::tuple<std::shared_ptr<AbstractOutput<double>>, std::shared_ptr<AbstractOutput<double>>> getOutputs() const;
+  std::array<std::shared_ptr<AbstractOutput<double>>,2> getOutput() const;
 
 protected:
-  std::shared_ptr<AbstractOutput<double>> left;
-  std::shared_ptr<AbstractOutput<double>> right;
+  std::array<std::shared_ptr<AbstractOutput<double>>,2> motors;
 };
 
 }

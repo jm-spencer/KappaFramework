@@ -2,16 +2,16 @@
 
 namespace kappa {
 
-TankChassis::TankChassis(std::shared_ptr<AbstractOutput<double>> ileft, std::shared_ptr<AbstractOutput<double>> iright):
-  left(ileft), right(iright) {}
+TankChassis::TankChassis(std::array<std::shared_ptr<AbstractOutput<double>>,2> imotors):
+  motors(std::move(imotors)) {}
 
-void TankChassis::set(std::tuple<double, double> iTarget) {
-  left->set(std::get<0>(iTarget));
-  right->set(std::get<1>(iTarget));
+void TankChassis::set(std::array<double,2> iTarget) {
+  motors[0]->set(iTarget[0]);
+  motors[1]->set(iTarget[1]);
 }
 
-std::tuple<std::shared_ptr<AbstractOutput<double>>, std::shared_ptr<AbstractOutput<double>>> TankChassis::getOutputs() const {
-  return std::make_tuple(std::shared_ptr<AbstractOutput<double>>(left), std::shared_ptr<AbstractOutput<double>>(right));
+std::array<std::shared_ptr<AbstractOutput<double>>,2> TankChassis::getOutput() const {
+  return motors;
 }
 
 }
