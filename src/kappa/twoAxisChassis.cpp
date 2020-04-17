@@ -1,4 +1,5 @@
 #include "twoAxisChassis.hpp"
+#include <math.h>
 
 namespace kappa {
 

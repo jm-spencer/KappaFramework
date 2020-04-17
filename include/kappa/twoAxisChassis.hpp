@@ -2,14 +2,13 @@
 
 #include "abstractOutput.hpp"
 #include "tankChassis.hpp"
-#include "okapi/api/util/logging.hpp"
 
 namespace kappa {
 
 /**
  *  controller input should be of the format (linear, angular),
  *  linear is in the units in/s, and angular in rad/s, and
- *  assumes outputs are in rpm
+ *  outputs are assumed to be in rpm
  */
 
 class TwoAxisChassis : public AbstractOutput<std::tuple<double,double>> {

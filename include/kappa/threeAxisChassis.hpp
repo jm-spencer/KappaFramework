@@ -1,0 +1,29 @@
+#pragma once
+
+#include "abstractOutput.hpp"
+#include "strafeChassis.hpp"
+
+namespace kappa {
+
+/**
+ *  controller input should be of the format (forward, sideways, angular),
+ *  both linear inputs are in the units in/s, and angular in rad/s, and
+ *  outputs are assumed to be in rpm
+ */
+
+class ThreeAxisChassis : public AbstractOutput<std::tuple<double,double,double>> {
+public:
+  ThreeAxisChassis(std::shared_ptr<AbstractOutput<std::tuple<double,double,double,double>>> ichassis, double iwheelDiameter, double ichassisWidth);
+
+  virtual void set(std::tuple<double,double,double> iTarget) override;
+
+  std::shared_ptr<AbstractOutput<std::tuple<double,double,double,double>>> getOutput() const;
+
+protected:
+  std::shared_ptr<AbstractOutput<std::tuple<double,double,double,double>>> chassis;
+  double linearScalar{0};
+  double angularScalar{0};
+};
+
+
+}
