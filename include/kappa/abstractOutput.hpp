@@ -5,7 +5,7 @@ namespace kappa {
 template <typename T> class AbstractOutput {
 public:
   /**
-   * Accept values in the range [-1,1]
+   * Bounds are implimentation specific
    */
   virtual void set(T itarget) = 0;
 };

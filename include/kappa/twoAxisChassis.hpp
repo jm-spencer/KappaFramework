@@ -8,12 +8,13 @@ namespace kappa {
 
 /**
  *  controller input should be of the format (linear, angular),
- *  given angular is a target in CW rad/s and linear is in the units of chassisWidth/s
+ *  linear is in the units in/s, and angular in rad/s, and
+ *  assumes outputs are in rpm
  */
 
 class TwoAxisChassis : public AbstractOutput<std::tuple<double,double>> {
 public:
-  TwoAxisChassis(std::shared_ptr<AbstractOutput<std::tuple<double,double>>> ichassis, double ichassisWidth, const std::shared_ptr<okapi::Logger> &ilogger = okapi::Logger::getDefaultLogger());
+  TwoAxisChassis(std::shared_ptr<AbstractOutput<std::tuple<double,double>>> ichassis, double iwheelDiameter, double ichassisWidth);
 
   virtual void set(std::tuple<double,double> iTarget) override;
 
@@ -21,9 +22,8 @@ public:
 
 protected:
   std::shared_ptr<AbstractOutput<std::tuple<double,double>>> chassis;
-  double chassisWidth{0};
-
-  std::shared_ptr<okapi::Logger> logger;
+  double linearScalar{0};
+  double angularScalar{0};
 };
 
 }

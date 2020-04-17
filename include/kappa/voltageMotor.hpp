@@ -8,6 +8,9 @@ class VoltageMotor : public AbstractOutput<double> {
 public:
   VoltageMotor(std::shared_ptr<okapi::AbstractMotor> imotor);
 
+  /**
+   * in units of mV
+   */
   virtual void set(double iTarget) override;
 
   std::shared_ptr<okapi::AbstractMotor> getMotor() const;

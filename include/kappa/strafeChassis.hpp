@@ -11,6 +11,9 @@ public:
   StrafeChassis(std::shared_ptr<AbstractOutput<double>> ifrontLeft, std::shared_ptr<AbstractOutput<double>> ifrontRight,
                 std::shared_ptr<AbstractOutput<double>> ibackLeft, std::shared_ptr<AbstractOutput<double>> ibackRight);
 
+  /**
+   * Tuple in the format {frontLeft, frontRight, backLeft, backRight}; inherits units from provided outputs
+   */
   virtual void set(std::tuple<double,double,double,double> iTarget) override;
 
   std::tuple<std::shared_ptr<AbstractOutput<double>>, std::shared_ptr<AbstractOutput<double>>,

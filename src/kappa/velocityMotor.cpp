@@ -3,13 +3,10 @@
 namespace kappa {
 
 VelocityMotor::VelocityMotor(std::shared_ptr<okapi::AbstractMotor> imotor):
-  motor(imotor){
-
-  maxVelocity = static_cast<std::underlying_type_t<okapi::AbstractMotor::gearset>>(motor->getGearing());
-}
+  motor(imotor) {}
 
 void VelocityMotor::set(double iTarget) {
-  motor->moveVelocity(iTarget * maxVelocity);
+  motor->moveVelocity(iTarget);
 }
 
 std::shared_ptr<okapi::AbstractMotor> VelocityMotor::getMotor() const {

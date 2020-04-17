@@ -10,6 +10,9 @@ class TankChassis : public AbstractOutput<std::tuple<double,double>> {
 public:
   TankChassis(std::shared_ptr<AbstractOutput<double>> ileft, std::shared_ptr<AbstractOutput<double>> iright);
 
+  /**
+   * Tuple in the format {left,right}; inherits units from provided outputs
+   */
   virtual void set(std::tuple<double,double> iTarget) override;
 
   std::tuple<std::shared_ptr<AbstractOutput<double>>, std::shared_ptr<AbstractOutput<double>>> getOutputs() const;

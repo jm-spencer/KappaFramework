@@ -8,6 +8,9 @@ class VelocityMotor : public AbstractOutput<double> {
 public:
   VelocityMotor(std::shared_ptr<okapi::AbstractMotor> imotor);
 
+  /**
+   * in units of rpm
+   */
   virtual void set(double iTarget) override;
 
   std::shared_ptr<okapi::AbstractMotor> getMotor() const;
