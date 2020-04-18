@@ -4,6 +4,7 @@
 #include <array>
 #include <memory>
 
+
 namespace kappa {
 
 class TankChassis : public AbstractOutput<std::array<double,2>> {

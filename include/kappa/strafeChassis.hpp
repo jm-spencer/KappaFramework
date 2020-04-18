@@ -4,6 +4,7 @@
 #include <array>
 #include <memory>
 
+
 namespace kappa {
 
 class StrafeChassis : public AbstractOutput<std::array<double,4>> {

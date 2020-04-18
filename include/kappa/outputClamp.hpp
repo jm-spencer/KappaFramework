@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <memory>
 
+
 namespace kappa {
 
 template <typename T>

@@ -2,8 +2,7 @@
 
 #include "abstractInput.hpp"
 #include "abstractOutput.hpp"
-#include "okapi/api/util/logging.hpp"
-#include "okapi/api/control/util/settledUtil.hpp"
+#include "pros/rtos.h"
 #include <memory>
 
 
@@ -49,9 +48,7 @@ public:
     return error;
   }
 
-  virtual bool isSettled() {
-    return isDisabled() ? true : settledUtil->isSettled(error);
-  };
+  virtual bool isSettled() = 0;
 
   virtual void waitUntilSettled(uint32_t timestep = 10) {
     while(!isSettled()){
@@ -78,9 +75,6 @@ protected:
   OUT outputMin;
 
   bool disabled{false};
-
-  std::shared_ptr<okapi::Logger> logger;
-  std::unique_ptr<okapi::SettledUtil> settledUtil;
 };
 
 }

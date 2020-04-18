@@ -1,6 +1,8 @@
 #pragma once
+
 #include "abstractOutput.hpp"
 #include "okapi/api/device/motor/abstractMotor.hpp"
+
 
 namespace kappa {
 

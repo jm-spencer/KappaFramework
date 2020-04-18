@@ -1,7 +1,9 @@
 #pragma once
 
 #include "abstractOutput.hpp"
-#include "strafeChassis.hpp"
+#include <tuple>
+#include <memory>
+
 
 namespace kappa {
 
@@ -10,7 +12,6 @@ namespace kappa {
  *  both linear inputs are in the units in/s, and angular in rad/s, and
  *  outputs are assumed to be in rpm
  */
-
 class ThreeAxisChassis : public AbstractOutput<std::tuple<double,double,double>> {
 public:
   ThreeAxisChassis(std::shared_ptr<AbstractOutput<std::array<double,4>>> ichassis, double iwheelDiameter, double ichassisWidth);
