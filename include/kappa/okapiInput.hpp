@@ -12,6 +12,8 @@ public:
 
   virtual double get() const override;
 
+  std::shared_ptr<okapi::RotarySensor> getInput() const;
+
 protected:
   std::shared_ptr<okapi::RotarySensor> input{nullptr};
   double gearRatio{1};

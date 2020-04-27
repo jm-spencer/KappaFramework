@@ -9,4 +9,9 @@ double OkapiInput::get() const {
   return input->controllerGet() * gearRatio;
 }
 
+std::shared_ptr<okapi::RotarySensor> OkapiInput::getInput() const {
+  return input;
+}
+
+
 }
