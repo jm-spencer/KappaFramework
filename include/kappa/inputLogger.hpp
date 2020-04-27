@@ -12,20 +12,20 @@ namespace kappa {
 template <typename T>
 class InputLogger : public AbstractInput<T> {
 public:
-  InputLogger(std::shared_ptr<AbstractInput<T>> iInput, int iprecision = 6, std::string iprefix = "", std::string ipostfix = "\n", std::ostream &iout = std::cout):
-    Input(iInput), prefix(iprefix), postfix(ipostfix), out(iout) {
+  InputLogger(std::shared_ptr<AbstractInput<T>> iinput, int iprecision = 6, std::string iprefix = "", std::string ipostfix = "\n", std::ostream &iout = std::cout):
+    input(iinput), prefix(iprefix), postfix(ipostfix), out(iout) {
 
     out << std::setprecision(iprecision);
   }
 
-  virtual T get() override {
-    T value = Input->get();
+  virtual T get() const override {
+    T value = input->get();
     out << prefix << value << postfix;
     return value;
   }
 
 protected:
-  std::shared_ptr<AbstractInput<T>> Input{nullptr};
+  std::shared_ptr<AbstractInput<T>> input{nullptr};
 
   std::string prefix;
   std::string postfix;

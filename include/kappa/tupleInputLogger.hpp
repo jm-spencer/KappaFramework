@@ -13,14 +13,14 @@ namespace kappa {
 template <typename... T>
 class TupleInputLogger : public AbstractInput<std::tuple<T...>> {
 public:
-  TupleInputLogger(std::shared_ptr<AbstractInput<std::tuple<T...>>> iInput, int iprecision = 6, std::string iprefix = "", std::string iseperator = " ", std::string ipostfix = "\n", std::ostream &iout = std::cout):
-    Input(iInput), prefix(iprefix), seperator(iseperator), postfix(ipostfix), out(iout) {
+  TupleInputLogger(std::shared_ptr<AbstractInput<std::tuple<T...>>> iinput, int iprecision = 6, std::string iprefix = "", std::string iseperator = " ", std::string ipostfix = "\n", std::ostream &iout = std::cout):
+    input(iinput), prefix(iprefix), seperator(iseperator), postfix(ipostfix), out(iout) {
 
     out << std::setprecision(iprecision);
   }
 
-  virtual std::tuple<T...> get() override {
-    std::tuple<T...> values = Input->get();
+  virtual std::tuple<T...> get() const override {
+    std::tuple<T...> values = input->get();
 
     out << prefix;
 
@@ -34,7 +34,7 @@ public:
   }
 
 protected:
-  std::shared_ptr<AbstractInput<std::tuple<T...>>> Input{nullptr};
+  std::shared_ptr<AbstractInput<std::tuple<T...>>> input{nullptr};
 
   std::string prefix;
   std::string seperator;
