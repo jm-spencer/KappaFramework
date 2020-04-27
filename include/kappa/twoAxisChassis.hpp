@@ -15,6 +15,8 @@ namespace kappa {
 
 class TwoAxisChassis : public AbstractOutput<std::tuple<double,double>> {
 public:
+  TwoAxisChassis(std::shared_ptr<AbstractOutput<std::array<double,2>>> ichassis);
+
   TwoAxisChassis(std::shared_ptr<AbstractOutput<std::array<double,2>>> ichassis, double iwheelDiameter, double ichassisWidth);
 
   virtual void set(std::tuple<double,double> iTarget) override;
