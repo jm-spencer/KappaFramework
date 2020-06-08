@@ -10,7 +10,7 @@ namespace kappa {
 template<typename T, std::size_t N>
 class ArrayDistributor : public AbstractOutput<std::array<T,N>> {
 public:
-  StrafeChassis(std::array<std::shared_ptr<AbstractOutput<T>>,N> ioutput):
+  ArrayDistributor(std::array<std::shared_ptr<AbstractOutput<T>>,N> ioutput):
     output(std::move(ioutput)) {}
 
 
