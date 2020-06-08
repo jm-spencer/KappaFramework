@@ -1,4 +1,4 @@
-#include "kappa/okapiInput.hpp"
+#include "kappa/input/impl/okapiInput.hpp"
 
 namespace kappa {
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "abstractInput.hpp"
+#include "kappa/input/abstractInput.hpp"
 #include "okapi/api/device/rotarysensor/continuousRotarySensor.hpp"
 #include <memory>
 

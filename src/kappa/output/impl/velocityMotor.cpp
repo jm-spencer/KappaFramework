@@ -1,4 +1,4 @@
-#include "kappa/velocityMotor.hpp"
+#include "kappa/output/impl/velocityMotor.hpp"
 
 namespace kappa {
 

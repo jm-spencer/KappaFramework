@@ -1,6 +1,6 @@
 #pragma once
 
-#include "abstractOutput.hpp"
+#include "kappa/output/abstractOutput.hpp"
 #include <tuple>
 #include <memory>
 

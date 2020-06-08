@@ -1,6 +1,6 @@
 #pragma once
 
-#include "abstractOutput.hpp"
+#include "kappa/output/abstractOutput.hpp"
 #include <tuple>
 #include <memory>
 
@@ -15,7 +15,7 @@ namespace kappa {
 class ThreeAxisChassis : public AbstractOutput<std::tuple<double,double,double>> {
 public:
   ThreeAxisChassis(std::shared_ptr<AbstractOutput<std::array<double,4>>> ichassis);
-  
+
   ThreeAxisChassis(std::shared_ptr<AbstractOutput<std::array<double,4>>> ichassis, double iwheelDiameter, double ichassisWidth);
 
   virtual void set(std::tuple<double,double,double> iTarget) override;

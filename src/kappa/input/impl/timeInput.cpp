@@ -1,11 +1,11 @@
-#include "kappa/timeInput"
-#include "pros/rtos.h"
+#include "kappa/input/impl/timeInput.hpp"
+#include "pros/rtos.hpp"
 
 namespace kappa {
 
 TimeInput::TimeInput() {}
 
-TimeInput::get() const {
+double TimeInput::get() const {
   return pros::millis();
 }
 

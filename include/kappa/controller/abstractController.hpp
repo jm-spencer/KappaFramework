@@ -1,9 +1,8 @@
 #pragma once
 
-#include "abstractInput.hpp"
-#include "abstractOutput.hpp"
-#include "pros/rtos.h"
-#include <memory>
+#include "kappa/input/abstractInput.hpp"
+#include "kappa/output/abstractOutput.hpp"
+#include "pros/rtos.hpp"
 
 
 namespace kappa {
