@@ -2,6 +2,8 @@
 
 #include "kappa/controller/abstractController.hpp"
 #include "okapi/api/control/util/settledUtil.hpp"
+#include "okapi/api/filter/filter.hpp"
+#include "okapi/api/filter/passthroughFilter.hpp"
 #include "okapi/impl/util/timer.hpp"
 #include <memory>
 
@@ -17,7 +19,9 @@ public:
     double kF;
   };
 
-  PidController(Gains igains, std::unique_ptr<okapi::SettledUtil> isettledUtil = std::make_unique<okapi::SettledUtil>(std::unique_ptr<okapi::Timer>()));
+  PidController(Gains igains,
+                std::unique_ptr<okapi::SettledUtil> isettledUtil = std::make_unique<okapi::SettledUtil>(std::unique_ptr<okapi::Timer>()),
+                std::unique_ptr<okapi::Filter> iderivativeFilter = std::make_unique<okapi::PassthroughFilter>());
 
   virtual void setTarget(const double &itarget) override;
 
@@ -36,6 +40,7 @@ public:
 protected:
   Gains gains;
   std::unique_ptr<okapi::SettledUtil> settledUtil{nullptr};
+  std::unique_ptr<okapi::Filter> derivativeFilter{nullptr};
 
   double integral;
   double derivative;

@@ -3,8 +3,8 @@
 
 namespace kappa {
 
-PidController::PidController(Gains igains, std::unique_ptr<okapi::SettledUtil> isettledUtil):
-  gains(igains), settledUtil(std::move(isettledUtil)) {
+PidController::PidController(Gains igains, std::unique_ptr<okapi::SettledUtil> isettledUtil, std::unique_ptr<okapi::Filter> iderivativeFilter):
+  gains(igains), settledUtil(std::move(isettledUtil)), derivativeFilter(std::move(iderivativeFilter)) {
     reset();
   }
 
@@ -17,7 +17,7 @@ double PidController::step(double ireading) {
 
   integral += error;
 
-  derivative = error - lastError;
+  derivative = derivativeFilter->filter(error - lastError);
 
   output = (gains.kP * error) + (gains.kI * integral) + (gains.kD * derivative) + gains.kF;
 
