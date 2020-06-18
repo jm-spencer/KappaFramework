@@ -9,7 +9,7 @@ ThreeAxisChassis::ThreeAxisChassis(std::shared_ptr<AbstractOutput<std::array<dou
 ThreeAxisChassis::ThreeAxisChassis(std::shared_ptr<AbstractOutput<std::array<double,4>>> ichassis, double iwheelDiameter, double ichassisWidth):
   chassis(ichassis), linearScalar((30.0 / M_PI) / iwheelDiameter), angularScalar((30.0 / M_PI) * (ichassisWidth / iwheelDiameter)) {}
 
-void ThreeAxisChassis::set(std::tuple<double,double,double> iTarget) {
+void ThreeAxisChassis::set(const std::tuple<double,double,double> &iTarget) {
   double forwardTarget  = linearScalar  * std::get<0>(iTarget);
   double sidewaysTarget = linearScalar  * std::get<1>(iTarget);
   double rotationTarget = angularScalar * std::get<2>(iTarget);

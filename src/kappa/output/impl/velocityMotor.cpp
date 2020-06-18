@@ -5,7 +5,7 @@ namespace kappa {
 VelocityMotor::VelocityMotor(std::shared_ptr<okapi::AbstractMotor> imotor):
   motor(imotor) {}
 
-void VelocityMotor::set(double iTarget) {
+void VelocityMotor::set(const double &iTarget) {
   motor->moveVelocity(iTarget);
 }
 

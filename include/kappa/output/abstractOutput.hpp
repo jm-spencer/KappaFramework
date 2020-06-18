@@ -7,7 +7,7 @@ public:
   /**
    * Bounds are implimentation specific
    */
-  virtual void set(T itarget) = 0;
+  virtual void set(const T &itarget) = 0;
 };
 
 }

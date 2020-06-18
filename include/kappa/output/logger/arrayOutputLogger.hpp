@@ -19,10 +19,10 @@ public:
     out << std::setprecision(iprecision);
   }
 
-  virtual void set(std::array<T,N> iTarget) override {
+  virtual void set(const std::array<T,N> &iTarget) override {
     out << prefix;
 
-    for(T &i : iTarget){
+    for(const T &i : iTarget){
       out << i << seperator;
     }
 

@@ -5,7 +5,7 @@ namespace kappa {
 VoltageMotor::VoltageMotor(std::shared_ptr<okapi::AbstractMotor> imotor):
   motor(imotor){}
 
-void VoltageMotor::set(double iTarget) {
+void VoltageMotor::set(const double &iTarget) {
   motor->moveVoltage(iTarget);
 }
 

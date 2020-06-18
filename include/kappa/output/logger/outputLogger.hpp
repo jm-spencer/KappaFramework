@@ -18,7 +18,7 @@ public:
     out << std::setprecision(iprecision);
   }
 
-  virtual void set(T iTarget) override {
+  virtual void set(const T &iTarget) override {
     out << prefix << iTarget << postfix;
     output->set(iTarget);
   }

@@ -19,10 +19,10 @@ public:
     out << std::setprecision(iprecision);
   }
 
-  virtual void set(std::tuple<T...> iTarget) override {
+  virtual void set(const std::tuple<T...> &iTarget) override {
     out << prefix;
 
-    for(auto &i : iTarget){
+    for(const auto &i : iTarget){
       out << i << seperator;
     }
 

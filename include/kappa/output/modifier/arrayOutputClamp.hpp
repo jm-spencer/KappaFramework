@@ -19,19 +19,19 @@ public:
   ArrayOutputClamp(std::shared_ptr<AbstractOutput<std::array<T,N>>> ioutput, T imin, T imax):
     output(ioutput), min(imin), max(imax) {}
 
-  virtual void set(std::array<T,N> iTarget) override {
+  virtual void set(const std::array<T,N> &iTarget) override {
     T maxVal = std::max(iTarget);
     T minVal = std::min(iTarget);
 
     if(max < maxVal) {
       if(min > minVal) {
-        output->set(scaleArray(iTarget, (max / maxVal) < (min / minVal) ? (max / maxVal) : (min / minVal)));
+        output->set(scaleArray(iTarget, target, (max / maxVal) < (min / minVal) ? (max / maxVal) : (min / minVal)));
       } else {
-        output->set(scaleArray(iTarget, max / maxVal));
+        output->set(scaleArray(iTarget, target, max / maxVal));
       }
     } else {
       if(min > minVal) {
-        output->set(scaleArray(iTarget, min / minVal));
+        output->set(scaleArray(iTarget, target, min / minVal));
       } else {
         output->set(iTarget);
       }
@@ -44,15 +44,16 @@ public:
 
 protected:
   std::shared_ptr<AbstractOutput<std::array<T,N>>> output{nullptr};
+  std::array<T,N> target;
   T min{0};
   T max{0};
 
-  static std::array<T,N> &scaleArray(std::array<T,N> &arr, T scalar) {
-    for(T &i : arr){
-      i *= scalar;
+  static std::array<T,N> &scaleArray(const std::array<T,N> &arr, std::array<T,N> &target, T scalar) {
+    for(std::size_t i = 0; i < N; i++){
+      target[i] = arr[i] * scalar;
     }
 
-    return arr;
+    return target;
   }
 };
 

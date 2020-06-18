@@ -13,7 +13,7 @@ public:
   /**
    * in units of rpm
    */
-  virtual void set(double iTarget) override;
+  virtual void set(const double &iTarget) override;
 
   std::shared_ptr<okapi::AbstractMotor> getMotor() const;
 

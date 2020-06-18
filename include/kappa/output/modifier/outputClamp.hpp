@@ -13,7 +13,7 @@ public:
   OutputClamp(std::shared_ptr<AbstractOutput<T>> ioutput, T imin, T imax):
     output(ioutput), min(imin), max(imax) {}
 
-  virtual void set(T iTarget) override {
+  virtual void set(const T &iTarget) override {
     output->set(std::clamp(iTarget, min, max));
   }
 
