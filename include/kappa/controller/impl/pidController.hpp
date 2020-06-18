@@ -19,7 +19,7 @@ public:
 
   PidController(Gains igains, std::unique_ptr<okapi::SettledUtil> isettledUtil = std::make_unique<okapi::SettledUtil>(std::unique_ptr<okapi::Timer>()));
 
-  virtual void setTarget(double itarget) override;
+  virtual void setTarget(const double &itarget) override;
 
   virtual double step(double ireading) override;
 

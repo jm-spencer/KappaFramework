@@ -8,7 +8,7 @@ PidController::PidController(Gains igains, std::unique_ptr<okapi::SettledUtil> i
     reset();
   }
 
-void PidController::setTarget(double itarget) {
+void PidController::setTarget(const double &itarget) {
   target = itarget;
 }
 

@@ -10,9 +10,9 @@ namespace kappa {
 template <typename IN, typename TARGET, typename OUT>
 class AbstractController : public AbstractOutput<TARGET>{
 public:
-  virtual void setTarget(TARGET itarget) = 0;
+  virtual void setTarget(const TARGET &itarget) = 0;
 
-  virtual void set(TARGET itarget) override {
+  virtual void set(const TARGET &itarget) override {
       setTarget(itarget);
   }
 
