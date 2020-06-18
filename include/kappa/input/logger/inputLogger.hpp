@@ -24,6 +24,10 @@ public:
     return value;
   }
 
+  std::shared_ptr<AbstractInput<T>> getInput() const {
+    return input;
+  }
+
 protected:
   std::shared_ptr<AbstractInput<T>> input{nullptr};
 

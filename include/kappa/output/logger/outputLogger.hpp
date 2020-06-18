@@ -23,6 +23,10 @@ public:
     output->set(iTarget);
   }
 
+  std::shared_ptr<AbstractOutput<T>> getOutput() const {
+    return output;
+  };
+
 protected:
   std::shared_ptr<AbstractOutput<T>> output{nullptr};
 

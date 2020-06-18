@@ -33,6 +33,10 @@ public:
     return values;
   }
 
+  std::shared_ptr<AbstractInput<std::tuple<T...>>> getInput() const {
+    return input;
+  }
+
 protected:
   std::shared_ptr<AbstractInput<std::tuple<T...>>> input{nullptr};
 

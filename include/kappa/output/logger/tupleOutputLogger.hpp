@@ -31,6 +31,10 @@ public:
     output->set(iTarget);
   }
 
+  std::shared_ptr<AbstractOutput<std::tuple<T...>>> getOutput() const {
+    return output;
+  };
+
 protected:
   std::shared_ptr<AbstractOutput<std::tuple<T...>>> output{nullptr};
 

@@ -33,6 +33,10 @@ public:
     return values;
   }
 
+  std::shared_ptr<AbstractInput<std::array<T,N>>> getInput() const {
+    return input;
+  }
+
 protected:
   std::shared_ptr<AbstractInput<std::array<T,N>>> input{nullptr};
 
