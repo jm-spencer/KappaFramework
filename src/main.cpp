@@ -18,11 +18,13 @@ void opcontrol() {
     std::make_shared<kappa::TupleOutputLogger<double,double>>(6, "Tuple Logger", " | ", "\n",
       std::make_shared<kappa::TwoAxisChassis>(4, 10,
         std::make_shared<kappa::ArrayOutputClamp<double,2>>(-100, 100,
-          std::make_shared<kappa::ArrayOutputLogger<double,2>>(6, "Array Logger", " | ", "\n\n",
+          std::make_shared<kappa::ArrayOutputLogger<double,2>>(6, "Array Logger", " | ", "\n",
             std::make_shared<kappa::ArrayDistributor<double,2>>(
               kappa::ArrayDistributor<double,2>({
                 std::make_shared<kappa::VelocityMotor>(std::make_shared<okapi::Motor>(1)),
-                std::make_shared<kappa::VelocityMotor>(std::make_shared<okapi::Motor>(2))
+                std::make_shared<kappa::OutputLogger<double>>(6, "Output Logger", "\n\n",
+                  std::make_shared<kappa::VelocityMotor>(std::make_shared<okapi::Motor>(2))
+                )
               })
             )
           )
@@ -30,13 +32,22 @@ void opcontrol() {
       )
     );
 
-  std::tuple<double,double> target = {1,0};
+  auto input =
+    std::make_shared<kappa::InputLogger<double>>(6, "Input Logger", "\n\n",
+      std::make_shared<kappa::OkapiInput>(
+        std::make_shared<okapi::ADIEncoder>(1,2)
+      )
+    );
+
+  auto controller =
+    std::make_shared<kappa::PidController>(kappa::PidController::Gains{1,0,0.5,0});
+
+  std::tuple<double,double> target = {50,0};
 
   while(true) {
-    std::get<0>(target) = 2.5 * rand() - 1;
-    std::get<1>(target) = 2.0 * rand() - 1;
-
+    std::get<1>(target) = controller->step(input->get());
     chassis->set(target);
+
     pros::delay(10);
   }
 
