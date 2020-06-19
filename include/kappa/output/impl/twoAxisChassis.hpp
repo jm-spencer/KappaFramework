@@ -17,7 +17,7 @@ class TwoAxisChassis : public AbstractOutput<std::tuple<double,double>> {
 public:
   TwoAxisChassis(std::shared_ptr<AbstractOutput<std::array<double,2>>> ichassis);
 
-  TwoAxisChassis(std::shared_ptr<AbstractOutput<std::array<double,2>>> ichassis, double iwheelDiameter, double ichassisWidth);
+  TwoAxisChassis(double iwheelDiameter, double ichassisWidth, std::shared_ptr<AbstractOutput<std::array<double,2>>> ichassis);
 
   virtual void set(const std::tuple<double,double> &iTarget) override;
 

@@ -6,7 +6,7 @@ namespace kappa {
 TwoAxisChassis::TwoAxisChassis(std::shared_ptr<AbstractOutput<std::array<double,2>>> ichassis):
   chassis(ichassis), linearScalar(1), angularScalar(1){}
 
-TwoAxisChassis::TwoAxisChassis(std::shared_ptr<AbstractOutput<std::array<double,2>>> ichassis, double iwheelDiameter, double ichassisWidth):
+TwoAxisChassis::TwoAxisChassis(double iwheelDiameter, double ichassisWidth, std::shared_ptr<AbstractOutput<std::array<double,2>>> ichassis):
   chassis(ichassis), linearScalar((30.0 / M_PI) / iwheelDiameter), angularScalar((30.0 / M_PI) * (ichassisWidth / iwheelDiameter)) {}
 
 void TwoAxisChassis::set(const std::tuple<double,double> &iTarget) {

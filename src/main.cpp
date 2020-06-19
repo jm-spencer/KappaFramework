@@ -16,8 +16,8 @@ void opcontrol() {
 
   auto chassis =
     std::make_shared<kappa::TupleOutputLogger<double,double>>(
-      std::make_shared<kappa::TwoAxisChassis>(
-        std::make_shared<kappa::ArrayOutputClamp<double,2>>(
+      std::make_shared<kappa::TwoAxisChassis>(4, 10,
+        std::make_shared<kappa::ArrayOutputClamp<double,2>>(-100, 100,
           std::make_shared<kappa::ArrayOutputLogger<double,2>>(
             std::make_shared<kappa::ArrayDistributor<double,2>>(
               kappa::ArrayDistributor<double,2>({
@@ -25,8 +25,8 @@ void opcontrol() {
                 std::make_shared<kappa::VelocityMotor>(std::make_shared<okapi::Motor>(2))
               })
             )
-          ), -100, 100
-        ), 4, 10
+          )
+        )
       )
     );
 

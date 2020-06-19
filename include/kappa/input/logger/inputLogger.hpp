@@ -12,7 +12,16 @@ namespace kappa {
 template <typename T>
 class InputLogger : public AbstractInput<T> {
 public:
-  InputLogger(std::shared_ptr<AbstractInput<T>> iinput, int iprecision = 6, std::string iprefix = "", std::string ipostfix = "\n", std::ostream &iout = std::cout):
+  InputLogger(std::shared_ptr<AbstractInput<T>> iinput):
+    input(iinput), prefix(""), postfix("\n"), out(std::cout) {}
+
+  InputLogger(int iprecision, std::string iprefix, std::string ipostfix, std::shared_ptr<AbstractInput<T>> iinput):
+    input(iinput), prefix(iprefix), postfix(ipostfix), out(std::cout) {
+
+    out << std::setprecision(iprecision);
+  }
+
+  InputLogger(int iprecision, std::string iprefix, std::string ipostfix, std::ostream &iout, std::shared_ptr<AbstractInput<T>> iinput):
     input(iinput), prefix(iprefix), postfix(ipostfix), out(iout) {
 
     out << std::setprecision(iprecision);

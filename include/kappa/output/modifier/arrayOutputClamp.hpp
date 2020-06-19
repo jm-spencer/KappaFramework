@@ -16,7 +16,7 @@ namespace kappa {
 template <typename T, std::size_t N>
 class ArrayOutputClamp : public AbstractOutput<std::array<T,N>> {
 public:
-  ArrayOutputClamp(std::shared_ptr<AbstractOutput<std::array<T,N>>> ioutput, T imin, T imax):
+  ArrayOutputClamp(T imin, T imax, std::shared_ptr<AbstractOutput<std::array<T,N>>> ioutput):
     output(ioutput), min(imin), max(imax) {}
 
   virtual void set(const std::array<T,N> &iTarget) override {
