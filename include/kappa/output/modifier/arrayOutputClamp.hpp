@@ -20,8 +20,8 @@ public:
     output(ioutput), min(imin), max(imax) {}
 
   virtual void set(const std::array<T,N> &iTarget) override {
-    T maxVal = std::max(iTarget);
-    T minVal = std::min(iTarget);
+    T maxVal = *std::max_element(iTarget.begin(), iTarget.end());
+    T minVal = *std::min_element(iTarget.begin(), iTarget.end());
 
     if(max < maxVal) {
       if(min > minVal) {

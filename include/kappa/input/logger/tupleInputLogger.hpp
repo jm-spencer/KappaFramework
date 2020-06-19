@@ -1,6 +1,7 @@
 #pragma once
 
 #include "kappa/input/abstractInput.hpp"
+#include "kappa/util/tupleLogger.hpp"
 #include <memory>
 #include <tuple>
 #include <ostream>
@@ -24,9 +25,7 @@ public:
 
     out << prefix;
 
-    for(auto &i : values){
-      out << i << seperator;
-    }
+    printTuple(values, out, seperator);
 
     out << postfix;
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "kappa/output/abstractOutput.hpp"
+#include "kappa/util/tupleLogger.hpp"
 #include <memory>
 #include <tuple>
 #include <ostream>
@@ -22,9 +23,7 @@ public:
   virtual void set(const std::tuple<T...> &iTarget) override {
     out << prefix;
 
-    for(const auto &i : iTarget){
-      out << i << seperator;
-    }
+    printTuple(iTarget, out, seperator);
 
     out << postfix;
 
