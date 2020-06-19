@@ -15,10 +15,10 @@ void autonomous() {}
 void opcontrol() {
 
   auto chassis =
-    std::make_shared<kappa::TupleOutputLogger<double,double>>(
+    std::make_shared<kappa::TupleOutputLogger<double,double>>(6, "Tuple Logger", " | ", "\n",
       std::make_shared<kappa::TwoAxisChassis>(4, 10,
         std::make_shared<kappa::ArrayOutputClamp<double,2>>(-100, 100,
-          std::make_shared<kappa::ArrayOutputLogger<double,2>>(
+          std::make_shared<kappa::ArrayOutputLogger<double,2>>(6, "Array Logger", " | ", "\n\n",
             std::make_shared<kappa::ArrayDistributor<double,2>>(
               kappa::ArrayDistributor<double,2>({
                 std::make_shared<kappa::VelocityMotor>(std::make_shared<okapi::Motor>(1)),
