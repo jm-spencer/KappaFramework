@@ -33,6 +33,9 @@ void opcontrol() {
   std::tuple<double,double> target = {1,0};
 
   while(true) {
+    std::get<0>(target) = 2.5 * rand() - 1;
+    std::get<1>(target) = 2.0 * rand() - 1;
+
     chassis->set(target);
     pros::delay(10);
   }
