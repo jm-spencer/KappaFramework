@@ -4,7 +4,7 @@
 #include "okapi/api/control/util/settledUtil.hpp"
 #include "okapi/api/filter/filter.hpp"
 #include "okapi/api/filter/passthroughFilter.hpp"
-#include "okapi/impl/util/timer.hpp"
+#include "okapi/impl/util/timeUtilFactory.hpp"
 #include <memory>
 
 namespace kappa {
@@ -20,7 +20,7 @@ public:
   };
 
   PidController(Gains igains,
-                std::unique_ptr<okapi::SettledUtil> isettledUtil = std::make_unique<okapi::SettledUtil>(std::unique_ptr<okapi::Timer>()),
+                const okapi::TimeUtil &itimeUtil = okapi::TimeUtilFactory::createDefault(),
                 std::unique_ptr<okapi::Filter> iderivativeFilter = std::make_unique<okapi::PassthroughFilter>());
 
   virtual void setTarget(const double &itarget) override;

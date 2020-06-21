@@ -3,8 +3,8 @@
 
 namespace kappa {
 
-PidController::PidController(Gains igains, std::unique_ptr<okapi::SettledUtil> isettledUtil, std::unique_ptr<okapi::Filter> iderivativeFilter):
-  gains(igains), settledUtil(std::move(isettledUtil)), derivativeFilter(std::move(iderivativeFilter)) {
+PidController::PidController(Gains igains, const okapi::TimeUtil &itimeUtil, std::unique_ptr<okapi::Filter> iderivativeFilter):
+  gains(igains), settledUtil(itimeUtil.getSettledUtil()), derivativeFilter(std::move(iderivativeFilter)) {
     reset();
   }
 
@@ -13,20 +13,24 @@ void PidController::setTarget(const double &itarget) {
 }
 
 double PidController::step(double ireading) {
-  error = target - ireading;
+  if(!disabled){
+    error = target - ireading;
 
-  integral += error;
+    integral += error;
 
-  derivative = derivativeFilter->filter(error - lastError);
+    derivative = derivativeFilter->filter(error - lastError);
 
-  output = (gains.kP * error) + (gains.kI * integral) + (gains.kD * derivative) + gains.kF;
+    output = (gains.kP * error) + (gains.kI * integral) + (gains.kD * derivative) + gains.kF;
 
-  lastReading = ireading;
-  lastError = error;
+    lastReading = ireading;
+    lastError = error;
 
-  settledUtil->isSettled(error);
+    settledUtil->isSettled(error);
 
-  return output;
+    return output;
+  } else {
+    return 0;
+  }
 }
 
 bool PidController::isSettled() {
