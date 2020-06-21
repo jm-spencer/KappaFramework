@@ -1,6 +1,7 @@
 #include "kappa/controller/impl/pidController.hpp"
 #include "kappa/controller/abstractController.hpp"
 
+#include "kappa/input/impl/imuInput.hpp"
 #include "kappa/input/impl/okapiInput.hpp"
 #include "kappa/input/impl/timeInput.hpp"
 #include "kappa/input/logger/arrayInputLogger.hpp"

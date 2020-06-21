@@ -21,9 +21,9 @@ void opcontrol() {
           std::make_shared<kappa::ArrayOutputLogger<double,2>>(6, "Array Logger", " | ", "\n",
             std::make_shared<kappa::ArrayDistributor<double,2>>(
               kappa::ArrayDistributor<double,2>({
-                std::make_shared<kappa::VelocityMotor>(std::make_shared<okapi::Motor>(1)),
+                std::make_shared<kappa::VelocityMotor>(std::make_shared<okapi::Motor>(19)),
                 std::make_shared<kappa::OutputLogger<double>>(6, "Output Logger", "\n\n",
-                  std::make_shared<kappa::VelocityMotor>(std::make_shared<okapi::Motor>(2))
+                  std::make_shared<kappa::VelocityMotor>(std::make_shared<okapi::Motor>(20))
                 )
               })
             )
@@ -35,7 +35,7 @@ void opcontrol() {
   auto input =
     std::make_shared<kappa::InputLogger<double>>(6, "Input Logger", "\n\n",
       std::make_shared<kappa::OkapiInput>(
-        std::make_shared<okapi::ADIEncoder>(1,2)
+        std::make_shared<okapi::ADIEncoder>(3,4)
       )
     );
 
