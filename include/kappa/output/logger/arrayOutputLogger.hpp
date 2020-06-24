@@ -14,13 +14,10 @@ template <typename T, std::size_t N>
 class ArrayOutputLogger : public AbstractOutput<std::array<T,N>> {
 public:
   ArrayOutputLogger(std::shared_ptr<AbstractOutput<std::array<T,N>>> ioutput):
-    output(ioutput), prefix(""), seperator(" "), postfix("\n"), out(std::cout) {}
+    ArrayOutputLogger(6, "", " ", "\n", std::cout, ioutput) {}
 
   ArrayOutputLogger(int iprecision, std::string iprefix, std::string iseperator, std::string ipostfix, std::shared_ptr<AbstractOutput<std::array<T,N>>> ioutput):
-    output(ioutput), prefix(iprefix), seperator(iseperator), postfix(ipostfix), out(std::cout){
-
-    out << std::setprecision(iprecision);
-  }
+    ArrayOutputLogger(iprecision, iprefix, iseperator, ipostfix, std::cout, ioutput) {}
 
   ArrayOutputLogger(int iprecision, std::string iprefix, std::string iseperator, std::string ipostfix, std::ostream &iout, std::shared_ptr<AbstractOutput<std::array<T,N>>> ioutput):
     output(ioutput), prefix(iprefix), seperator(iseperator), postfix(ipostfix), out(iout) {

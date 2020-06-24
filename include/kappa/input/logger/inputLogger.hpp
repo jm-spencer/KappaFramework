@@ -13,13 +13,10 @@ template <typename T>
 class InputLogger : public AbstractInput<T> {
 public:
   InputLogger(std::shared_ptr<AbstractInput<T>> iinput):
-    input(iinput), prefix(""), postfix("\n"), out(std::cout) {}
+    InputLogger(6, "", "\n", std::cout, iinput) {}
 
   InputLogger(int iprecision, std::string iprefix, std::string ipostfix, std::shared_ptr<AbstractInput<T>> iinput):
-    input(iinput), prefix(iprefix), postfix(ipostfix), out(std::cout) {
-
-    out << std::setprecision(iprecision);
-  }
+    InputLogger(iprecision, iprefix, ipostfix, std::cout, iinput) {}
 
   InputLogger(int iprecision, std::string iprefix, std::string ipostfix, std::ostream &iout, std::shared_ptr<AbstractInput<T>> iinput):
     input(iinput), prefix(iprefix), postfix(ipostfix), out(iout) {
