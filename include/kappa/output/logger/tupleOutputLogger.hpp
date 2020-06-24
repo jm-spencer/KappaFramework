@@ -53,4 +53,7 @@ protected:
   std::ostream &out;
 };
 
+extern template class TupleOutputLogger<double,double>;
+extern template class TupleOutputLogger<double,double,double>;
+
 }

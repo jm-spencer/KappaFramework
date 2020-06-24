@@ -13,7 +13,7 @@ template <typename T>
 class OutputLogger : public AbstractOutput<T> {
 public:
   OutputLogger(std::shared_ptr<AbstractOutput<T>> ioutput):
-    output(ioutput) {}
+    output(ioutput), prefix(""), postfix("\n"), out(std::cout) {}
 
   OutputLogger(int iprecision, std::string iprefix, std::string ipostfix, std::shared_ptr<AbstractOutput<T>> ioutput):
     output(ioutput), prefix(iprefix), postfix(ipostfix), out(std::cout) {
@@ -44,5 +44,7 @@ protected:
 
   std::ostream &out;
 };
+
+extern template class OutputLogger<double>;
 
 }

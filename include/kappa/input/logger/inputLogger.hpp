@@ -46,4 +46,6 @@ protected:
   std::ostream &out;
 };
 
+extern template class InputLogger<double>;
+
 }

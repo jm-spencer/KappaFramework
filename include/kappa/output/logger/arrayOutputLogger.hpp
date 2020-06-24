@@ -54,4 +54,8 @@ protected:
   std::ostream &out;
 };
 
+extern template class ArrayOutputLogger<double, 2>;
+extern template class ArrayOutputLogger<double, 3>;
+extern template class ArrayOutputLogger<double, 4>;
+
 }

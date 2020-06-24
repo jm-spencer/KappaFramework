@@ -31,4 +31,7 @@ protected:
   std::array<std::shared_ptr<AbstractOutput<T>>,N> output;
 };
 
+extern template class ArrayDistributor<double, 2>;
+extern template class ArrayDistributor<double, 4>;
+
 }

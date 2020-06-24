@@ -27,5 +27,6 @@ protected:
   T max{0};
 };
 
+extern template class OutputClamp<double>;
 
 }

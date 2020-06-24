@@ -57,5 +57,7 @@ protected:
   }
 };
 
+extern template class ArrayOutputClamp<double, 2>;
+extern template class ArrayOutputClamp<double, 4>;
 
 }
