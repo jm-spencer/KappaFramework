@@ -42,12 +42,21 @@ void opcontrol() {
   auto controller =
     std::make_shared<kappa::PidController>(kappa::PidController::Gains{1,0,0.5,0});
 
-  std::tuple<double,double> target = {50,0};
+
+  pros::Task testController([&] {
+    std::uint32_t now = pros::millis();
+    std::tuple<double,double> target = {50,0};
+
+    while (true) {
+      std::get<1>(target) = controller->step(input->get());
+      chassis->set(target);
+
+      pros::Task::delay_until(&now, 10);
+    }
+
+  }, "Test Controller");
 
   while(true) {
-    std::get<1>(target) = controller->step(input->get());
-    chassis->set(target);
-
     pros::delay(10);
   }
 
