@@ -12,9 +12,13 @@ void competition_initialize() {}
 
 void autonomous() {}
 
+std::shared_ptr<kappa::TupleOutputLogger<double,double>> chassis;
+std::shared_ptr<kappa::InputLogger<double>> input;
+std::shared_ptr<kappa::PidController> controller;
+
 void opcontrol() {
 
-  auto chassis =
+  chassis =
     std::make_shared<kappa::TupleOutputLogger<double,double>>(6, "Tuple Logger ", " | ", "\n",
       std::make_shared<kappa::TwoAxisChassis>(4, 10,
         std::make_shared<kappa::ArrayOutputClamp<double,2>>(-100, 100,
@@ -32,14 +36,14 @@ void opcontrol() {
       )
     );
 
-  auto input =
+  input =
     std::make_shared<kappa::InputLogger<double>>(6, "Input Logger ", "\n\n",
       std::make_shared<kappa::OkapiInput>(
         std::make_shared<okapi::ADIEncoder>(3,4)
       )
     );
 
-  auto controller =
+  controller =
     std::make_shared<kappa::PidController>(kappa::PidController::Gains{1,0,0.5,0});
 
 
