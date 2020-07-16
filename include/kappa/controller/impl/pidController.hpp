@@ -42,9 +42,9 @@ protected:
   std::unique_ptr<okapi::SettledUtil> settledUtil{nullptr};
   std::unique_ptr<okapi::Filter> derivativeFilter{nullptr};
 
-  double lastError;
-  double integral;
-  double derivative;
+  double lastError{0};
+  double integral{0};
+  double derivative{0};
 };
 
 }

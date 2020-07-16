@@ -18,10 +18,12 @@ public:
   };
 
   VPidSubController(Gains igains,
+                    double iconversion, // units of target / units of feedback
                     std::shared_ptr<AbstractInput<double>> iinput,
                     std::shared_ptr<AbstractOutput<double>> ioutput);
 
   VPidSubController(Gains igains,
+                    double iconversion, // units of target / units of feedback
                     std::unique_ptr<okapi::Filter> ivelocityFilter,
                     std::unique_ptr<okapi::Filter> iderivativeFilter,
                     std::shared_ptr<AbstractInput<double>> iinput,
@@ -35,6 +37,7 @@ protected:
   Gains gains;
   std::unique_ptr<okapi::Filter> velocityFilter{nullptr};
   std::unique_ptr<okapi::Filter> derivativeFilter{nullptr};
+  double conversion{0};
 
   double currentReading{0};
 

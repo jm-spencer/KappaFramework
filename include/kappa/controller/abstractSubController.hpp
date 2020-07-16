@@ -42,13 +42,13 @@ public:
   virtual void reset() = 0;
 
 protected:
-  TARGET target;
-  IN lastReading;
-  IN error;
+  TARGET target{0};
+  IN lastReading{0};
+  IN error{0};
 
-  OUT output;
-  OUT outputMax;
-  OUT outputMin;
+  OUT output{0};
+  OUT outputMax{std::numeric_limits<OUT>::max()};
+  OUT outputMin{std::numeric_limits<OUT>::min()};
 
   std::shared_ptr<AbstractInput<IN>> input{nullptr};
   std::shared_ptr<AbstractOutput<OUT>> outputDevice{nullptr};

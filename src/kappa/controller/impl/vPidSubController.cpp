@@ -8,16 +8,18 @@ static inline double sgn(double val) {
 }
 
 VPidSubController::VPidSubController(Gains igains,
+                                     double iconversion,
                                      std::shared_ptr<AbstractInput<double>> iinput,
                                      std::shared_ptr<AbstractOutput<double>> ioutput):
-                                     VPidSubController(igains, std::make_unique<okapi::PassthroughFilter>(), std::make_unique<okapi::PassthroughFilter>(), iinput, ioutput) {}
+                                     VPidSubController(igains, conversion, std::make_unique<okapi::PassthroughFilter>(), std::make_unique<okapi::PassthroughFilter>(), iinput, ioutput) {}
 
 VPidSubController::VPidSubController(Gains igains,
+                                     double iconversion,
                                      std::unique_ptr<okapi::Filter> ivelocityFilter,
                                      std::unique_ptr<okapi::Filter> iderivativeFilter,
                                      std::shared_ptr<AbstractInput<double>> iinput,
                                      std::shared_ptr<AbstractOutput<double>> ioutput):
-                                     gains(igains), velocityFilter(std::move(ivelocityFilter)), derivativeFilter(std::move(iderivativeFilter)) {
+                                     gains(igains), conversion(iconversion), velocityFilter(std::move(ivelocityFilter)), derivativeFilter(std::move(iderivativeFilter)) {
     input = iinput;
     outputDevice = ioutput;
     reset();
@@ -25,7 +27,7 @@ VPidSubController::VPidSubController(Gains igains,
 
 void VPidSubController::set(const double &itarget) {
     currentReading = input->get();
-    currentVelocity = velocityFilter->filter(currentReading - lastReading);
+    currentVelocity = velocityFilter->filter((currentReading - lastReading) * conversion);
     lastReading = currentReading;
 
     error = target - currentVelocity;
