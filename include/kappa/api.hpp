@@ -1,5 +1,7 @@
 #include "kappa/controller/impl/pidController.hpp"
+#include "kappa/controller/impl/vPidSubController.hpp"
 #include "kappa/controller/abstractController.hpp"
+#include "kappa/controller/abstractSubController.hpp"
 
 #include "kappa/input/impl/imuInput.hpp"
 #include "kappa/input/impl/okapiInput.hpp"
