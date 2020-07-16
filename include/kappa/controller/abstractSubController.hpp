@@ -2,28 +2,20 @@
 
 #include "kappa/input/abstractInput.hpp"
 #include "kappa/output/abstractOutput.hpp"
-#include "pros/rtos.hpp"
+#include <memory>
 
 
 namespace kappa {
 
 template <typename IN, typename TARGET, typename OUT>
-class AbstractController : public AbstractOutput<TARGET> {
+class AbstractSubController : public AbstractOutput<TARGET> {
 public:
-  virtual void setTarget(const TARGET &itarget) = 0;
-
-  virtual void set(const TARGET &itarget) override {
-      setTarget(itarget);
-  }
-
   virtual TARGET getTarget() const {
     return target;
   };
 
-  virtual OUT step(IN ireading) = 0;
-
   virtual OUT getOutput() const {
-    return isDisabled() ? 0 : output;
+    return output;
   };
 
   virtual void setOutputLimits(OUT imin, OUT imax) {
@@ -47,21 +39,7 @@ public:
     return error;
   }
 
-  virtual bool isSettled() = 0;
-
-  virtual void waitUntilSettled(uint32_t timestep = 10) {
-    while(!isSettled()){
-      pros::delay(timestep);
-    }
-  }
-
   virtual void reset() = 0;
-
-  virtual void disable(bool iisDisabled) = 0;
-
-  virtual bool isDisabled() const {
-      return disabled;
-  }
 
 protected:
   TARGET target;
@@ -72,7 +50,8 @@ protected:
   OUT outputMax;
   OUT outputMin;
 
-  bool disabled{false};
+  std::shared_ptr<AbstractInput<IN>> input{nullptr};
+  std::shared_ptr<AbstractOutput<OUT>> outputDevice{nullptr};
 };
 
 }
