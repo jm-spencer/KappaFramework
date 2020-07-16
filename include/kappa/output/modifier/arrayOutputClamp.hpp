@@ -19,21 +19,21 @@ public:
   ArrayOutputClamp(T imin, T imax, std::shared_ptr<AbstractOutput<std::array<T,N>>> ioutput):
     output(ioutput), min(imin), max(imax) {}
 
-  virtual void set(const std::array<T,N> &iTarget) override {
-    T maxVal = *std::max_element(iTarget.begin(), iTarget.end());
-    T minVal = *std::min_element(iTarget.begin(), iTarget.end());
+  virtual void set(const std::array<T,N> &itarget) override {
+    T maxVal = *std::max_element(itarget.begin(), itarget.end());
+    T minVal = *std::min_element(itarget.begin(), itarget.end());
 
     if(max < maxVal) {
       if(min > minVal) {
-        output->set(scaleArray(iTarget, target, (max / maxVal) < (min / minVal) ? (max / maxVal) : (min / minVal)));
+        output->set(scaleArray(itarget, target, (max / maxVal) < (min / minVal) ? (max / maxVal) : (min / minVal)));
       } else {
-        output->set(scaleArray(iTarget, target, max / maxVal));
+        output->set(scaleArray(itarget, target, max / maxVal));
       }
     } else {
       if(min > minVal) {
-        output->set(scaleArray(iTarget, target, min / minVal));
+        output->set(scaleArray(itarget, target, min / minVal));
       } else {
-        output->set(iTarget);
+        output->set(itarget);
       }
     }
   }

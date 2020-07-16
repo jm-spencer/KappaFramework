@@ -17,9 +17,9 @@ public:
   }
 
 
-  virtual void set(const std::array<T,N> &iTarget) override {
+  virtual void set(const std::array<T,N> &itarget) override {
     for(std::size_t i = 0; i < N; i++) {
-      output[i]->set(iTarget[i]);
+      output[i]->set(itarget[i]);
     }
   }
 

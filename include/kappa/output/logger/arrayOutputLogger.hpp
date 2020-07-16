@@ -25,16 +25,16 @@ public:
     out << std::setprecision(iprecision);
   }
 
-  virtual void set(const std::array<T,N> &iTarget) override {
+  virtual void set(const std::array<T,N> &itarget) override {
     out << prefix;
 
-    for(const T &i : iTarget){
+    for(const T &i : itarget){
       out << i << seperator;
     }
 
     out << postfix;
 
-    output->set(iTarget);
+    output->set(itarget);
   }
 
   std::shared_ptr<AbstractOutput<std::array<T,N>>> getOutput() const {

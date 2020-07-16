@@ -12,8 +12,8 @@ public:
   OutputScalar(double iscalar, std::shared_ptr<AbstractOutput<T>> ioutput):
     output(ioutput), scalar(iscalar) {}
 
-  virtual void set(const T &iTarget) override {
-    target = scalar * iTarget;
+  virtual void set(const T &itarget) override {
+    target = scalar * itarget;
     output->set(target);
   }
 

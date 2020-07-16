@@ -14,9 +14,9 @@ public:
   ArrayOutputScalar(double iscalar, std::shared_ptr<AbstractOutput<std::array<T,N>>> ioutput):
     output(ioutput), scalar(iscalar) {}
 
-  virtual void set(const std::array<T,N> &iTarget) override {
+  virtual void set(const std::array<T,N> &itarget) override {
     for(std::size_t i = 0; i < N; i++){
-      target[i] = scalar * iTarget[i];
+      target[i] = scalar * itarget[i];
     }
   }
 

@@ -18,7 +18,7 @@ public:
 
   ThreeAxisChassis(double iwheelDiameter, double ichassisWidth, std::shared_ptr<AbstractOutput<std::array<double,4>>> ichassis);
 
-  virtual void set(const std::tuple<double,double,double> &iTarget) override;
+  virtual void set(const std::tuple<double,double,double> &itarget) override;
 
   std::shared_ptr<AbstractOutput<std::array<double,4>>> getOutput() const;
 

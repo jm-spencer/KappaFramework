@@ -24,9 +24,9 @@ public:
     out << std::setprecision(iprecision);
   }
 
-  virtual void set(const T &iTarget) override {
-    out << prefix << iTarget << postfix;
-    output->set(iTarget);
+  virtual void set(const T &itarget) override {
+    out << prefix << itarget << postfix;
+    output->set(itarget);
   }
 
   std::shared_ptr<AbstractOutput<T>> getOutput() const {

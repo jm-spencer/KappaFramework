@@ -26,14 +26,14 @@ public:
     out << std::setprecision(iprecision);
   }
 
-  virtual void set(const std::tuple<T...> &iTarget) override {
+  virtual void set(const std::tuple<T...> &itarget) override {
     out << prefix;
 
-    printTuple(iTarget, out, seperator);
+    printTuple(itarget, out, seperator);
 
     out << postfix;
 
-    output->set(iTarget);
+    output->set(itarget);
   }
 
   std::shared_ptr<AbstractOutput<std::tuple<T...>>> getOutput() const {

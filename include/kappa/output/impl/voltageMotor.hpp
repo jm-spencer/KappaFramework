@@ -13,7 +13,7 @@ public:
   /**
    * in units of mV
    */
-  virtual void set(const double &iTarget) override;
+  virtual void set(const double &itarget) override;
 
   std::shared_ptr<okapi::AbstractMotor> getMotor() const;
 
