@@ -23,6 +23,11 @@ template class ArrayDistributor<double, 4>;
 template class ArrayOutputClamp<double, 2>;
 template class ArrayOutputClamp<double, 4>;
 
+template class ArrayOutputScalar<double, 2>;
+template class ArrayOutputScalar<double, 4>;
+
 template class OutputClamp<double>;
+
+template class OutputScalar<double>;
 
 }

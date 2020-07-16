@@ -19,5 +19,7 @@
 #include "kappa/output/logger/tupleOutputLogger.hpp"
 #include "kappa/output/modifier/arrayDistributor.hpp"
 #include "kappa/output/modifier/arrayOutputClamp.hpp"
+#include "kappa/output/modifier/arrayOutputScalar.hpp"
 #include "kappa/output/modifier/outputClamp.hpp"
+#include "kappa/output/modifier/outputScalar.hpp"
 #include "kappa/output/abstractOutput.hpp"
