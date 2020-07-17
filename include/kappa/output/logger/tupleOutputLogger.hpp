@@ -15,7 +15,7 @@ template <typename... T>
 class TupleOutputLogger : public AbstractOutput<std::tuple<T...>> {
 public:
   TupleOutputLogger(std::shared_ptr<AbstractOutput<std::tuple<T...>>> ioutput):
-    TupleOutputLogger(6, "", " ", "\n", std::cout, ioutput) {}
+    TupleOutputLogger(6, " ", " ", "\n", std::cout, ioutput) {}
 
   TupleOutputLogger(int iprecision, std::string iprefix, std::string iseperator, std::string ipostfix, std::shared_ptr<AbstractOutput<std::tuple<T...>>> ioutput):
     TupleOutputLogger(iprecision, iprefix, iseperator, ipostfix, std::cout, ioutput) {}

@@ -14,7 +14,7 @@ template <typename T, std::size_t N>
 class ArrayInputLogger : public AbstractInput<std::array<T,N>> {
 public:
   ArrayInputLogger(std::shared_ptr<AbstractInput<std::array<T,N>>> iinput):
-    ArrayInputLogger(6, "", " ", "\n", std::cout, iinput) {}
+    ArrayInputLogger(6, " ", " ", "\n", std::cout, iinput) {}
 
   ArrayInputLogger(int iprecision, std::string iprefix, std::string iseperator, std::string ipostfix, std::shared_ptr<AbstractInput<std::array<T,N>>> iinput):
     ArrayInputLogger(iprecision, iprefix, iseperator, ipostfix, std::cout, iinput) {}
