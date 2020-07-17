@@ -26,7 +26,7 @@ public:
 
   virtual T get() const override {
     T value = input->get();
-    out << prefix << value << postfix;
+    out << pros::millis() << prefix << value << postfix;
     return value;
   }
 

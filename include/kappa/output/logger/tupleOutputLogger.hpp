@@ -27,7 +27,7 @@ public:
   }
 
   virtual void set(const std::tuple<T...> &itarget) override {
-    out << prefix;
+    out << pros::millis() << prefix;
 
     printTuple(itarget, out, seperator);
 

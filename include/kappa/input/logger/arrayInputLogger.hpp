@@ -28,7 +28,7 @@ public:
   virtual std::array<T,N> get() const override {
     std::array<T,N> values = input->get();
 
-    out << prefix;
+    out << pros::millis() << prefix;
 
     for(T &i : values){
       out << i << seperator;

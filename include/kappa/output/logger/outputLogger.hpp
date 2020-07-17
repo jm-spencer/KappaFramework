@@ -25,7 +25,7 @@ public:
   }
 
   virtual void set(const T &itarget) override {
-    out << prefix << itarget << postfix;
+    out << pros::millis() << prefix << itarget << postfix;
     output->set(itarget);
   }
 

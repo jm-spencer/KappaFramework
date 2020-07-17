@@ -29,7 +29,7 @@ public:
   virtual std::tuple<T...> get() const override {
     std::tuple<T...> values = input->get();
 
-    out << prefix;
+    out << pros::millis() << prefix;
 
     printTuple(values, out, seperator);
 

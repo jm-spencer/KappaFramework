@@ -26,7 +26,7 @@ public:
   }
 
   virtual void set(const std::array<T,N> &itarget) override {
-    out << prefix;
+    out << pros::millis() << prefix;
 
     for(const T &i : itarget){
       out << i << seperator;
