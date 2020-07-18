@@ -24,8 +24,8 @@ public:
     out << std::setprecision(iprecision);
   }
 
-  virtual T get() const override {
-    T value = input->get();
+  virtual const T &get() override {
+    const T &value = input->get();
     out << pros::millis() << prefix << value << postfix;
     return value;
   }

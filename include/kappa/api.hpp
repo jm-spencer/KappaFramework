@@ -9,8 +9,9 @@
 #include "kappa/input/logger/arrayInputLogger.hpp"
 #include "kappa/input/logger/inputLogger.hpp"
 #include "kappa/input/logger/tupleInputLogger.hpp"
-#include "kappa/input/abstractComputationalInput.hpp"
 #include "kappa/input/abstractInput.hpp"
+#include "kappa/input/computationalInput.hpp"
+#include "kappa/input/simpleInput.hpp"
 
 #include "kappa/output/impl/threeAxisChassis.hpp"
 #include "kappa/output/impl/twoAxisChassis.hpp"

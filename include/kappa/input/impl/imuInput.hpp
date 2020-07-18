@@ -1,13 +1,13 @@
 #pragma once
 
-#include "kappa/input/abstractInput.hpp"
+#include "kappa/input/simpleInput.hpp"
 #include "pros/imu.hpp"
 #include <memory>
 
 
 namespace kappa {
 
-class ImuInput : public AbstractInput<double> {
+class ImuInput : public SimpleInput<double> {
 public:
   ImuInput(const std::uint8_t port);
 
@@ -15,10 +15,13 @@ public:
 
   std::shared_ptr<pros::Imu> getInput() const;
 
-  virtual double get() const override;
+  virtual const double &get() override;
+
+  virtual const double &getValue() const override;
 
 protected:
   std::shared_ptr<pros::Imu> input;
+  double value{0};
 };
 
 }

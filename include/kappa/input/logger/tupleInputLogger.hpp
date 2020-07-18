@@ -26,8 +26,8 @@ public:
     out << std::setprecision(iprecision);
   }
 
-  virtual std::tuple<T...> get() const override {
-    std::tuple<T...> values = input->get();
+  virtual const std::tuple<T...> &get() override {
+    const std::tuple<T...> &values = input->get();
 
     out << pros::millis() << prefix;
 

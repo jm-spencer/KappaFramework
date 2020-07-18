@@ -1,14 +1,19 @@
 #pragma once
 
-#include "kappa/input/abstractInput.hpp"
+#include "kappa/input/simpleInput.hpp"
 
 namespace kappa {
 
-class TimeInput : public AbstractInput<double> {
+class TimeInput : public SimpleInput<double> {
 public:
   TimeInput();
 
-  virtual double get() const override;
+  virtual const double &get() override;
+
+  virtual const double &getValue() const override;
+
+protected:
+  double value{0};
 };
 
 }

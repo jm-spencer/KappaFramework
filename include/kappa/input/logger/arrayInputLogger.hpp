@@ -25,12 +25,12 @@ public:
     out << std::setprecision(iprecision);
   }
 
-  virtual std::array<T,N> get() const override {
-    std::array<T,N> values = input->get();
+  virtual const std::array<T,N> &get() override {
+    const std::array<T,N> &values = input->get();
 
     out << pros::millis() << prefix;
 
-    for(T &i : values){
+    for(const T &i : values){
       out << i << seperator;
     }
 

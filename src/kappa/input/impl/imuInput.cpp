@@ -13,8 +13,13 @@ std::shared_ptr<pros::Imu> ImuInput::getInput() const {
   return input;
 }
 
-double ImuInput::get() const {
-  return input->get_rotation();
+const double &ImuInput::get() {
+  value = input->get_rotation();
+  return value;
+}
+
+const double &ImuInput::getValue() const {
+  return value;
 }
 
 }

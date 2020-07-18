@@ -5,8 +5,13 @@ namespace kappa {
 
 TimeInput::TimeInput() {}
 
-double TimeInput::get() const {
-  return pros::millis();
+const double &TimeInput::get() {
+  value = pros::millis();
+  return value;
+}
+
+const double &TimeInput::getValue() const {
+  return value;
 }
 
 }
