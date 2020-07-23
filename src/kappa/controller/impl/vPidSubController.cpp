@@ -27,7 +27,7 @@ VPidSubController::VPidSubController(Gains igains,
 
 void VPidSubController::set(const double &itarget) {
     currentReading = input->get();
-    currentVelocity = velocityFilter->filter((currentReading - lastReading) * conversion);
+    currentVelocity = velocityFilter->filter(currentReading - lastReading) * conversion;
     lastReading = currentReading;
 
     error = target - currentVelocity;

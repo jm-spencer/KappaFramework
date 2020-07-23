@@ -48,7 +48,7 @@ protected:
 
   OUT output{0};
   OUT outputMax{std::numeric_limits<OUT>::max()};
-  OUT outputMin{std::numeric_limits<OUT>::min()};
+  OUT outputMin{std::numeric_limits<OUT>::lowest()};
 
   std::shared_ptr<AbstractInput<IN>> input{nullptr};
   std::shared_ptr<AbstractOutput<OUT>> outputDevice{nullptr};

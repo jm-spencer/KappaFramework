@@ -70,7 +70,7 @@ protected:
 
   OUT output{0};
   OUT outputMax{std::numeric_limits<OUT>::max()};
-  OUT outputMin{std::numeric_limits<OUT>::min()};
+  OUT outputMin{std::numeric_limits<OUT>::lowest()};
 
   bool disabled{false};
 };
