@@ -11,7 +11,7 @@ VPidSubController::VPidSubController(Gains igains,
                                      double iconversion,
                                      std::shared_ptr<AbstractInput<double>> iinput,
                                      std::shared_ptr<AbstractOutput<double>> ioutput):
-                                     VPidSubController(igains, conversion, std::make_unique<okapi::PassthroughFilter>(), std::make_unique<okapi::PassthroughFilter>(), iinput, ioutput) {}
+                                     VPidSubController(igains, iconversion, std::make_unique<okapi::PassthroughFilter>(), std::make_unique<okapi::PassthroughFilter>(), iinput, ioutput) {}
 
 VPidSubController::VPidSubController(Gains igains,
                                      double iconversion,
