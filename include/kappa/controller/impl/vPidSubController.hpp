@@ -18,12 +18,12 @@ public:
   };
 
   VPidSubController(Gains igains,
-                    double iconversion, // (# of controller iterations in target time unit) * (# of encoder ticks in target distance unit)
+                    double iconversion, // (# of controller iterations in target time unit) / (# of encoder ticks in target distance unit)
                     std::shared_ptr<AbstractInput<double>> iinput,
                     std::shared_ptr<AbstractOutput<double>> ioutput);
 
   VPidSubController(Gains igains,
-                    double iconversion, // (# of controller iterations in target time unit) * (# of encoder ticks in target distance unit)
+                    double iconversion, // (# of controller iterations in target time unit) / (# of encoder ticks in target distance unit)
                     std::unique_ptr<okapi::Filter> ivelocityFilter,
                     std::unique_ptr<okapi::Filter> iderivativeFilter,
                     std::shared_ptr<AbstractInput<double>> iinput,
