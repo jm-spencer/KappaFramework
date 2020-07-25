@@ -3,6 +3,7 @@
 #include "kappa/input/abstractInput.hpp"
 #include "kappa/output/abstractOutput.hpp"
 #include "pros/rtos.hpp"
+#include <cfloat>
 
 
 namespace kappa {
@@ -10,6 +11,9 @@ namespace kappa {
 template <typename IN, typename TARGET, typename OUT>
 class AbstractController : public AbstractOutput<TARGET> {
 public:
+  AbstractController(OUT ioutputMin = std::numeric_limits<OUT>::lowest(), OUT ioutputMax = std::numeric_limits<OUT>::max()):
+    outputMin(ioutputMin), outputMax(ioutputMax) {}
+
   virtual void setTarget(const TARGET &itarget) = 0;
 
   virtual void set(const TARGET &itarget) override {

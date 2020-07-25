@@ -4,7 +4,10 @@
 namespace kappa {
 
 PidController::PidController(Gains igains, const okapi::TimeUtil &itimeUtil, std::unique_ptr<okapi::Filter> iderivativeFilter):
-  gains(igains), settledUtil(itimeUtil.getSettledUtil()), derivativeFilter(std::move(iderivativeFilter)) {
+  PidController(igains, -DBL_MAX, DBL_MAX, itimeUtil, std::move(iderivativeFilter)) {}
+
+PidController::PidController(Gains igains, double ioutputMin, double ioutputMax, const okapi::TimeUtil &itimeUtil, std::unique_ptr<okapi::Filter> iderivativeFilter):
+  AbstractController(ioutputMin, ioutputMax), gains(igains), settledUtil(itimeUtil.getSettledUtil()), derivativeFilter(std::move(iderivativeFilter)) {
     reset();
   }
 

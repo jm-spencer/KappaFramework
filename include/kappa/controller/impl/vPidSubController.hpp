@@ -29,6 +29,22 @@ public:
                     std::shared_ptr<AbstractInput<double>> iinput,
                     std::shared_ptr<AbstractOutput<double>> ioutput);
 
+  VPidSubController(Gains igains,
+                    double iconversion, // (# of controller iterations in target time unit) / (# of encoder ticks in target distance unit)
+                    double ioutputMin,
+                    double ioutputMax,
+                    std::shared_ptr<AbstractInput<double>> iinput,
+                    std::shared_ptr<AbstractOutput<double>> ioutput);
+
+  VPidSubController(Gains igains,
+                    double iconversion, // (# of controller iterations in target time unit) / (# of encoder ticks in target distance unit)
+                    double ioutputMin,
+                    double ioutputMax,
+                    std::unique_ptr<okapi::Filter> ivelocityFilter,
+                    std::unique_ptr<okapi::Filter> iderivativeFilter,
+                    std::shared_ptr<AbstractInput<double>> iinput,
+                    std::shared_ptr<AbstractOutput<double>> ioutput);
+
   virtual void set(const double &itarget) override;
 
   virtual void reset() override;

@@ -3,6 +3,7 @@
 #include "kappa/input/abstractInput.hpp"
 #include "kappa/output/abstractOutput.hpp"
 #include <memory>
+#include <cfloat>
 
 
 namespace kappa {
@@ -10,6 +11,9 @@ namespace kappa {
 template <typename IN, typename TARGET, typename OUT>
 class AbstractSubController : public AbstractOutput<TARGET> {
 public:
+  AbstractSubController(std::shared_ptr<AbstractInput<IN>> iinput, std::shared_ptr<AbstractOutput<OUT>> ioutputDevice, OUT ioutputMin = std::numeric_limits<OUT>::lowest(), OUT ioutputMax = std::numeric_limits<OUT>::max()):
+    input(iinput), outputDevice(ioutputDevice), outputMin(ioutputMin), outputMax(ioutputMax) {}
+
   virtual TARGET getTarget() const {
     return target;
   };
