@@ -6,11 +6,15 @@ template class ArrayInputLogger<double, 2>;
 template class ArrayInputLogger<double, 3>;
 template class ArrayInputLogger<double, 4>;
 
+template class InputGaugeLogger<double>;
+
 template class InputLogger<double>;
 
 template class ArrayOutputLogger<double, 2>;
 template class ArrayOutputLogger<double, 3>;
 template class ArrayOutputLogger<double, 4>;
+
+template class OutputGaugeLogger<double>;
 
 template class OutputLogger<double>;
 
