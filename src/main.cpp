@@ -29,6 +29,8 @@ void opcontrol() {
   auto gauge = lv_gauge_create(lv_scr_act(), NULL);
   lv_obj_set_size(gauge, 120, 120);
   lv_obj_set_pos(gauge, 0, 120);
+  lv_gauge_set_range(gauge, -110, 110);
+  lv_gauge_set_critical_value(gauge, 200);
   static lv_color_t ncolor[] = {LV_COLOR_RED};
   lv_gauge_set_needle_count(gauge, 1, ncolor);
 
