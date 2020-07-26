@@ -22,7 +22,7 @@ void opcontrol() {
   lv_obj_set_size(chart, 480, 120);
   lv_chart_set_type(chart, LV_CHART_TYPE_LINE);
   lv_chart_set_range(chart, -12000, 12000);
-  lv_chart_set_point_count(chart, 60);
+  lv_chart_set_point_count(chart, 240);
   auto ser1 = lv_chart_add_series(chart, LV_COLOR_RED);
   auto ser2 = lv_chart_add_series(chart, LV_COLOR_BLUE);
 
@@ -45,14 +45,18 @@ void opcontrol() {
                   kappa::VPidSubController::Gains{50,0,50,2000}, 20.0/3.0, -12000, 12000,
                   std::make_shared<kappa::OkapiInput>(std::make_shared<okapi::IntegratedEncoder>(19)),
                   std::make_shared<kappa::OutputChartLogger<double>>(chart, ser1,
-                    std::make_shared<kappa::VoltageMotor>(std::make_shared<okapi::Motor>(19))
+                    std::make_shared<kappa::OutputLogger<double>>(6, " M1 ", "\n",
+                      std::make_shared<kappa::VoltageMotor>(std::make_shared<okapi::Motor>(19))
+                    )
                   )
                 ),
                 std::make_shared<kappa::VPidSubController>(
                   kappa::VPidSubController::Gains{50,0,50,2000}, 20.0/3.0, -12000, 12000,
                   std::make_shared<kappa::OkapiInput>(std::make_shared<okapi::IntegratedEncoder>(20)),
                   std::make_shared<kappa::OutputChartLogger<double>>(chart, ser2,
-                    std::make_shared<kappa::VoltageMotor>(std::make_shared<okapi::Motor>(20))
+                    std::make_shared<kappa::OutputLogger<double>>(6, " M2 ", "\n",
+                      std::make_shared<kappa::VoltageMotor>(std::make_shared<okapi::Motor>(20))
+                    )
                   )
                 ),
               })
@@ -63,7 +67,7 @@ void opcontrol() {
     );
 
   input =
-    std::make_shared<kappa::InputLogger<double>>(6, " Input Logger ", "\n\n",
+    std::make_shared<kappa::InputLogger<double>>(6, " Input Logger ", "\n",
       std::make_shared<kappa::InputGaugeLogger<double>>(gauge, 0,
         std::make_shared<kappa::OkapiInput>(
           std::make_shared<okapi::ADIEncoder>(3,4)
@@ -82,6 +86,8 @@ void opcontrol() {
     while (true) {
       std::get<1>(target) = controller->step(input->get());
       chassis->set(target);
+
+      std::cout << "\n";
 
       pros::Task::delay_until(&now, 10);
     }
