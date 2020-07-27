@@ -42,8 +42,10 @@ void opcontrol() {
             std::make_shared<kappa::ArrayDistributor<double,2>>(
               kappa::ArrayDistributor<double,2>({
                 std::make_shared<kappa::VPidSubController>(
-                  kappa::VPidSubController::Gains{50,0,50,2000}, 20.0/3.0, -12000, 12000,
-                  std::make_shared<kappa::OkapiInput>(std::make_shared<okapi::IntegratedEncoder>(19)),
+                  kappa::VPidSubController::Gains{50,0,50,2000}, -12000, 12000,
+                  std::make_shared<kappa::InputDifferentiator<double>>(20.0/3.0,
+                    std::make_shared<kappa::OkapiInput>(std::make_shared<okapi::IntegratedEncoder>(19))
+                  ),
                   std::make_shared<kappa::OutputChartLogger<double>>(chart, ser1,
                     std::make_shared<kappa::OutputLogger<double>>(6, " M1 ", "\n",
                       std::make_shared<kappa::VoltageMotor>(std::make_shared<okapi::Motor>(19))
@@ -51,8 +53,10 @@ void opcontrol() {
                   )
                 ),
                 std::make_shared<kappa::VPidSubController>(
-                  kappa::VPidSubController::Gains{50,0,50,2000}, 20.0/3.0, -12000, 12000,
-                  std::make_shared<kappa::OkapiInput>(std::make_shared<okapi::IntegratedEncoder>(20)),
+                  kappa::VPidSubController::Gains{50,0,50,2000}, -12000, 12000,
+                  std::make_shared<kappa::InputDifferentiator<double>>(20.0/3.0,
+                    std::make_shared<kappa::OkapiInput>(std::make_shared<okapi::IntegratedEncoder>(20))
+                  ),
                   std::make_shared<kappa::OutputChartLogger<double>>(chart, ser2,
                     std::make_shared<kappa::OutputLogger<double>>(6, " M2 ", "\n",
                       std::make_shared<kappa::VoltageMotor>(std::make_shared<okapi::Motor>(20))

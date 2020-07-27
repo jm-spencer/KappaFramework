@@ -12,6 +12,8 @@ template class InputGaugeLogger<double>;
 
 template class InputLogger<double>;
 
+template class InputDifferentiator<double>;
+
 template class NullOutput<double>;
 
 template class ArrayOutputLogger<double, 2>;

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "kappa/input/abstractInput.hpp"
+#include "pros/rtos.hpp"
 #include <memory>
 #include <ostream>
 #include <iostream>

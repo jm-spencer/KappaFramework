@@ -8,44 +8,36 @@ static inline double sgn(double val) {
 }
 
 VPidSubController::VPidSubController(Gains igains,
-                                     double iconversion,
                                      std::shared_ptr<AbstractInput<double>> iinput,
                                      std::shared_ptr<AbstractOutput<double>> ioutput):
-                                     VPidSubController(igains, iconversion, -DBL_MAX, DBL_MAX, std::make_unique<okapi::PassthroughFilter>(), std::make_unique<okapi::PassthroughFilter>(), iinput, ioutput) {}
+                                     VPidSubController(igains, -DBL_MAX, DBL_MAX, std::make_unique<okapi::PassthroughFilter>(), iinput, ioutput) {}
 
 VPidSubController::VPidSubController(Gains igains,
-                                     double iconversion,
                                      double ioutputMin,
                                      double ioutputMax,
                                      std::shared_ptr<AbstractInput<double>> iinput,
                                      std::shared_ptr<AbstractOutput<double>> ioutput):
-                                     VPidSubController(igains, iconversion, ioutputMin, ioutputMax, std::make_unique<okapi::PassthroughFilter>(), std::make_unique<okapi::PassthroughFilter>(), iinput, ioutput) {}
+                                     VPidSubController(igains, ioutputMin, ioutputMax, std::make_unique<okapi::PassthroughFilter>(), iinput, ioutput) {}
 
 VPidSubController::VPidSubController(Gains igains,
-                                     double iconversion,
-                                     std::unique_ptr<okapi::Filter> ivelocityFilter,
                                      std::unique_ptr<okapi::Filter> iderivativeFilter,
                                      std::shared_ptr<AbstractInput<double>> iinput,
                                      std::shared_ptr<AbstractOutput<double>> ioutput):
-                                     VPidSubController(igains, iconversion, -DBL_MAX, DBL_MAX, std::move(ivelocityFilter), std::move(iderivativeFilter), iinput, ioutput) {}
+                                     VPidSubController(igains, -DBL_MAX, DBL_MAX, std::move(iderivativeFilter), iinput, ioutput) {}
 
 
 VPidSubController::VPidSubController(Gains igains,
-                                     double iconversion,
                                      double ioutputMin,
                                      double ioutputMax,
-                                     std::unique_ptr<okapi::Filter> ivelocityFilter,
                                      std::unique_ptr<okapi::Filter> iderivativeFilter,
                                      std::shared_ptr<AbstractInput<double>> iinput,
                                      std::shared_ptr<AbstractOutput<double>> ioutput):
-                                     AbstractSubController(iinput, ioutput, ioutputMin, ioutputMax), gains(igains), conversion(iconversion), velocityFilter(std::move(ivelocityFilter)), derivativeFilter(std::move(iderivativeFilter)) {
+                                     AbstractSubController(iinput, ioutput, ioutputMin, ioutputMax), gains(igains), derivativeFilter(std::move(iderivativeFilter)) {
     reset();
 }
 
 void VPidSubController::set(const double &itarget) {
-    currentReading = input->get();
-    currentVelocity = velocityFilter->filter(currentReading - lastReading) * conversion;
-    lastReading = currentReading;
+    currentVelocity = input->get();
 
     error = target - currentVelocity;
     derivative = derivativeFilter->filter(error - lastError);
@@ -62,11 +54,8 @@ void VPidSubController::set(const double &itarget) {
 
 void VPidSubController::reset() {
     target = 0;
-    lastReading = input->get();
     error = 0;
     output = 0;
-    currentReading = 0;
-    currentVelocity = 0;
     lastError = 0;
     derivative = 0;
     closedLoopSignal = 0;

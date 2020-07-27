@@ -2,6 +2,7 @@
 
 #include "kappa/input/abstractInput.hpp"
 #include "kappa/util/tupleLogger.hpp"
+#include "pros/rtos.hpp"
 #include <memory>
 #include <tuple>
 #include <ostream>
