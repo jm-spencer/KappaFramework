@@ -1,6 +1,8 @@
 #pragma once
 
 #include "kappa/output/abstractOutput.hpp"
+#include "kappa/output/impl/nullOutput.hpp"
+#include "pros/rtos.hpp"
 #include <memory>
 #include <ostream>
 #include <iostream>
@@ -12,13 +14,13 @@ namespace kappa {
 template <typename T>
 class OutputLogger : public AbstractOutput<T> {
 public:
-  OutputLogger(std::shared_ptr<AbstractOutput<T>> ioutput):
+  OutputLogger(std::shared_ptr<AbstractOutput<T>> ioutput = std::make_shared<NullOutput<T>>()):
     OutputLogger(6, " ", "\n", std::cout, ioutput) {}
 
-  OutputLogger(int iprecision, std::string iprefix, std::string ipostfix, std::shared_ptr<AbstractOutput<T>> ioutput):
+  OutputLogger(int iprecision, std::string iprefix, std::string ipostfix, std::shared_ptr<AbstractOutput<T>> ioutput = std::make_shared<NullOutput<T>>()):
     OutputLogger(iprecision, iprefix, ipostfix, std::cout, ioutput) {}
 
-  OutputLogger(int iprecision, std::string iprefix, std::string ipostfix, std::ostream &iout, std::shared_ptr<AbstractOutput<T>> ioutput):
+  OutputLogger(int iprecision, std::string iprefix, std::string ipostfix, std::ostream &iout, std::shared_ptr<AbstractOutput<T>> ioutput = std::make_shared<NullOutput<T>>()):
     output(ioutput), prefix(iprefix), postfix(ipostfix), out(iout) {
 
     out << std::setprecision(iprecision);

@@ -15,6 +15,7 @@
 #include "kappa/input/computationalInput.hpp"
 #include "kappa/input/simpleInput.hpp"
 
+#include "kappa/output/impl/nullOutput.hpp"
 #include "kappa/output/impl/threeAxisChassis.hpp"
 #include "kappa/output/impl/twoAxisChassis.hpp"
 #include "kappa/output/impl/velocityMotor.hpp"

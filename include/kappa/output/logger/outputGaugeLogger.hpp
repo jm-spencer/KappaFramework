@@ -1,6 +1,7 @@
 #pragma once
 
 #include "kappa/output/abstractOutput.hpp"
+#include "kappa/output/impl/nullOutput.hpp"
 #include "display/lv_objx/lv_gauge.h"
 #include <memory>
 
@@ -11,7 +12,7 @@ namespace kappa {
 template<typename T>
 class OutputGaugeLogger : public AbstractOutput<T> {
 public:
-  OutputGaugeLogger(lv_obj_t *igauge, uint8_t needle_id, std::shared_ptr<AbstractOutput<T>> ioutput):
+  OutputGaugeLogger(lv_obj_t *igauge, uint8_t needle_id, std::shared_ptr<AbstractOutput<T>> ioutput = std::make_shared<NullOutput<T>>()):
     output(ioutput), gauge(igauge), id(needle_id) {}
 
   virtual void set(const T &itarget) override {

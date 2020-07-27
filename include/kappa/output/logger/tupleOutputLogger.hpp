@@ -1,7 +1,9 @@
 #pragma once
 
 #include "kappa/output/abstractOutput.hpp"
+#include "kappa/output/impl/nullOutput.hpp"
 #include "kappa/util/tupleLogger.hpp"
+#include "pros/rtos.hpp"
 #include <memory>
 #include <tuple>
 #include <ostream>
@@ -14,13 +16,13 @@ namespace kappa {
 template <typename... T>
 class TupleOutputLogger : public AbstractOutput<std::tuple<T...>> {
 public:
-  TupleOutputLogger(std::shared_ptr<AbstractOutput<std::tuple<T...>>> ioutput):
+  TupleOutputLogger(std::shared_ptr<AbstractOutput<std::tuple<T...>>> ioutput = std::make_shared<NullOutput<std::tuple<T...>>>()):
     TupleOutputLogger(6, " ", " ", "\n", std::cout, ioutput) {}
 
-  TupleOutputLogger(int iprecision, std::string iprefix, std::string iseperator, std::string ipostfix, std::shared_ptr<AbstractOutput<std::tuple<T...>>> ioutput):
+  TupleOutputLogger(int iprecision, std::string iprefix, std::string iseperator, std::string ipostfix, std::shared_ptr<AbstractOutput<std::tuple<T...>>> ioutput = std::make_shared<NullOutput<std::tuple<T...>>>()):
     TupleOutputLogger(iprecision, iprefix, iseperator, ipostfix, std::cout, ioutput) {}
 
-  TupleOutputLogger(int iprecision, std::string iprefix, std::string iseperator, std::string ipostfix, std::ostream &iout, std::shared_ptr<AbstractOutput<std::tuple<T...>>> ioutput):
+  TupleOutputLogger(int iprecision, std::string iprefix, std::string iseperator, std::string ipostfix, std::ostream &iout, std::shared_ptr<AbstractOutput<std::tuple<T...>>> ioutput = std::make_shared<NullOutput<std::tuple<T...>>>()):
     output(ioutput), prefix(iprefix), seperator(iseperator), postfix(ipostfix), out(iout) {
 
     out << std::setprecision(iprecision);

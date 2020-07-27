@@ -1,6 +1,7 @@
 #pragma once
 
 #include "kappa/output/abstractOutput.hpp"
+#include "kappa/output/impl/nullOutput.hpp"
 #include "display/lv_objx/lv_chart.h"
 #include <memory>
 
@@ -11,7 +12,7 @@ namespace kappa {
 template<typename T>
 class OutputChartLogger : public AbstractOutput<T> {
 public:
-  OutputChartLogger(lv_obj_t *ichart, lv_chart_series_t *iser, std::shared_ptr<AbstractOutput<T>> ioutput):
+  OutputChartLogger(lv_obj_t *ichart, lv_chart_series_t *iser, std::shared_ptr<AbstractOutput<T>> ioutput = std::make_shared<NullOutput<T>>()):
     output(ioutput), chart(ichart), ser(iser) {}
 
   virtual void set(const T &itarget) override {
