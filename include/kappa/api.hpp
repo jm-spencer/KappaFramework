@@ -12,6 +12,7 @@
 #include "kappa/input/logger/inputLogger.hpp"
 #include "kappa/input/logger/tupleInputLogger.hpp"
 #include "kappa/input/modifier/inputDifferentiator.hpp"
+#include "kappa/input/modifier/arrayConsolidator.hpp"
 #include "kappa/input/abstractInput.hpp"
 #include "kappa/input/computationalInput.hpp"
 #include "kappa/input/simpleInput.hpp"

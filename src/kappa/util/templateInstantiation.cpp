@@ -14,6 +14,10 @@ template class InputLogger<double>;
 
 template class InputDifferentiator<double>;
 
+template class ArrayConsolidator<double, 2>;
+template class ArrayConsolidator<double, 3>;
+template class ArrayConsolidator<double, 4>;
+
 template class NullOutput<double>;
 
 template class ArrayOutputLogger<double, 2>;

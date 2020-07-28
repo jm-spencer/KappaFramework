@@ -15,6 +15,7 @@ void autonomous() {}
 std::shared_ptr<kappa::TupleOutputLogger<double,double>> chassis;
 std::shared_ptr<kappa::InputLogger<double>> input;
 std::shared_ptr<kappa::PidController> controller;
+std::shared_ptr<kappa::ArrayInputLogger<double,3>> testInput;
 
 void opcontrol() {
   auto chart = lv_chart_create(lv_scr_act(), NULL);
@@ -41,36 +42,34 @@ void opcontrol() {
       std::make_shared<kappa::TwoAxisChassis>(4, 10,
         std::make_shared<kappa::ArrayOutputClamp<double,2>>(-100, 100,
           std::make_shared<kappa::ArrayOutputLogger<double,2>>(6, " Array Logger ", " | ", "\n",
-            std::make_shared<kappa::ArrayDistributor<double,2>>(
-              kappa::ArrayDistributor<double,2>({
-                std::make_shared<kappa::OutputChartLogger<double>>(chart, targ1,
-                  std::make_shared<kappa::VPidSubController>(
-                    kappa::VPidSubController::Gains{50,0,50,2000}, -12000, 12000,
-                    std::make_shared<kappa::InputChartLogger<double>>(chart, read1,
-                      std::make_shared<kappa::InputDifferentiator<double>>(20.0/3.0,
-                        std::make_shared<kappa::OkapiInput>(std::make_shared<okapi::IntegratedEncoder>(19))
-                      )
-                    ),
-                    std::make_shared<kappa::OutputLogger<double>>(6, " M1 ", "\n",
-                      std::make_shared<kappa::VoltageMotor>(std::make_shared<okapi::Motor>(19))
+            std::make_shared<kappa::ArrayDistributor<double,2>>(std::initializer_list<std::shared_ptr<kappa::AbstractOutput<double>>>{
+              std::make_shared<kappa::OutputChartLogger<double>>(chart, targ1,
+                std::make_shared<kappa::VPidSubController>(
+                  kappa::VPidSubController::Gains{50,0,50,2000}, -12000, 12000,
+                  std::make_shared<kappa::InputChartLogger<double>>(chart, read1,
+                    std::make_shared<kappa::InputDifferentiator<double>>(20.0/3.0,
+                      std::make_shared<kappa::OkapiInput>(std::make_shared<okapi::IntegratedEncoder>(19))
                     )
-                  )
-                ),
-                std::make_shared<kappa::OutputChartLogger<double>>(chart, targ2,
-                  std::make_shared<kappa::VPidSubController>(
-                    kappa::VPidSubController::Gains{50,0,50,2000}, -12000, 12000,
-                    std::make_shared<kappa::InputChartLogger<double>>(chart, read2,
-                      std::make_shared<kappa::InputDifferentiator<double>>(20.0/3.0,
-                        std::make_shared<kappa::OkapiInput>(std::make_shared<okapi::IntegratedEncoder>(20))
-                      )
-                    ),
-                    std::make_shared<kappa::OutputLogger<double>>(6, " M2 ", "\n",
-                      std::make_shared<kappa::VoltageMotor>(std::make_shared<okapi::Motor>(20))
-                    )
+                  ),
+                  std::make_shared<kappa::OutputLogger<double>>(6, " M1 ", "\n",
+                    std::make_shared<kappa::VoltageMotor>(std::make_shared<okapi::Motor>(19))
                   )
                 )
-              })
-            )
+              ),
+              std::make_shared<kappa::OutputChartLogger<double>>(chart, targ2,
+                std::make_shared<kappa::VPidSubController>(
+                  kappa::VPidSubController::Gains{50,0,50,2000}, -12000, 12000,
+                  std::make_shared<kappa::InputChartLogger<double>>(chart, read2,
+                    std::make_shared<kappa::InputDifferentiator<double>>(20.0/3.0,
+                      std::make_shared<kappa::OkapiInput>(std::make_shared<okapi::IntegratedEncoder>(20))
+                    )
+                  ),
+                  std::make_shared<kappa::OutputLogger<double>>(6, " M2 ", "\n",
+                    std::make_shared<kappa::VoltageMotor>(std::make_shared<okapi::Motor>(20))
+                  )
+                )
+              )
+            })
           )
         )
       )
@@ -89,6 +88,16 @@ void opcontrol() {
     std::make_shared<kappa::PidController>(kappa::PidController::Gains{1,0,0.5,0});
 
 
+  testInput =
+    std::make_shared<kappa::ArrayInputLogger<double,3>>(6, " Test InputArray ", " | ", "\n",
+      std::make_shared<kappa::ArrayConsolidator<double,3>>(std::initializer_list<std::shared_ptr<kappa::AbstractInput<double>>>{
+        std::make_shared<kappa::OkapiInput>(std::make_shared<okapi::ADIEncoder>(3,4)),
+        std::make_shared<kappa::ImuInput>(11),
+        std::make_shared<kappa::TimeInput>()
+      })
+    );
+
+
   pros::Task testController([&] {
     std::uint32_t now = pros::millis();
     std::tuple<double,double> target = {50,0};
@@ -96,6 +105,10 @@ void opcontrol() {
     while (true) {
       std::get<1>(target) = controller->step(input->get());
       chassis->set(target);
+
+      std::cout << "\n";
+
+      testInput->get();
 
       std::cout << "\n";
 
