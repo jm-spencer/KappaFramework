@@ -9,7 +9,7 @@ namespace kappa {
 
 class ImuInput : public SimpleInput<double> {
 public:
-  ImuInput(const std::uint8_t port);
+  ImuInput(const std::uint8_t port, bool ccw = true); // if true, the imu will return ccw rotation as positive
 
   std::int32_t calibrate() const;
 
@@ -21,6 +21,7 @@ public:
 
 protected:
   std::shared_ptr<pros::Imu> input;
+  double coef;
   double value{0};
 };
 

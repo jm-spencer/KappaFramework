@@ -11,6 +11,7 @@ namespace kappa {
  *  controller input should be of the format (forward, sideways, angular),
  *  both linear inputs are in the units in/s, and angular in rad/s, and
  *  outputs are assumed to be in rpm
+ *  output array starts at front left and moves ccw
  */
 class ThreeAxisChassis : public AbstractOutput<std::tuple<double,double,double>> {
 public:

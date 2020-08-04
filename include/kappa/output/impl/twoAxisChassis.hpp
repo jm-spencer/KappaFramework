@@ -10,7 +10,8 @@ namespace kappa {
 /**
  *  controller input should be of the format (linear, angular),
  *  linear is in the units in/s, and angular in rad/s, and
- *  outputs are assumed to be in rpm
+ *  outputs are assumed to be in rpm.
+ *  output array follows left, right motors
  */
 
 class TwoAxisChassis : public AbstractOutput<std::tuple<double,double>> {

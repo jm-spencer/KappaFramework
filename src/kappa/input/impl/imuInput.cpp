@@ -2,8 +2,8 @@
 
 namespace kappa {
 
-ImuInput::ImuInput(const std::uint8_t port):
-  input(std::make_shared<pros::Imu>(port)) {}
+ImuInput::ImuInput(const std::uint8_t port, bool ccw):
+  input(std::make_shared<pros::Imu>(port)), coef(ccw ? -1 : 1) {}
 
 std::int32_t ImuInput::calibrate() const {
   return input->reset();
@@ -14,7 +14,7 @@ std::shared_ptr<pros::Imu> ImuInput::getInput() const {
 }
 
 const double &ImuInput::get() {
-  value = input->get_rotation();
+  value = coef * input->get_rotation();
   return value;
 }
 

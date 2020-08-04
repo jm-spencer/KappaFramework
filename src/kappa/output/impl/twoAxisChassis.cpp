@@ -13,8 +13,8 @@ void TwoAxisChassis::set(const std::tuple<double,double> &iTarget) {
   double linearTarget   = linearScalar  * std::get<0>(iTarget);
   double rotationTarget = angularScalar * std::get<1>(iTarget);
 
-  chassis->set({linearTarget + rotationTarget,
-                linearTarget - rotationTarget});
+  chassis->set({linearTarget - rotationTarget,
+                linearTarget + rotationTarget});
 }
 
 std::shared_ptr<AbstractOutput<std::array<double,2>>> TwoAxisChassis::getOutput() const {
