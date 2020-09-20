@@ -28,10 +28,10 @@ public:
   }
 
   virtual void set(const std::array<T,N> &itarget) override {
-    out << pros::millis() << prefix;
+    out << pros::millis() << prefix << itarget[0];
 
-    for(const T &i : itarget){
-      out << i << seperator;
+    for(std::size_t i = 1; i < N; i++){
+      out << seperator << itarget[i];
     }
 
     out << postfix;

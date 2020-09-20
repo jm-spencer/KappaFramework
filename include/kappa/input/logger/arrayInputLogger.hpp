@@ -29,10 +29,10 @@ public:
   virtual const std::array<T,N> &get() override {
     const std::array<T,N> &values = input->get();
 
-    out << pros::millis() << prefix;
+    out << pros::millis() << prefix << values[0];
 
-    for(const T &i : values){
-      out << i << seperator;
+    for(std::size_t i = 1; i < N; i++){
+      out << seperator << values[i];
     }
 
     out << postfix;
