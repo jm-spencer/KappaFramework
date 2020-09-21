@@ -2,6 +2,14 @@
 
 namespace kappa {
 
+template class FileInput<1>;
+template class FileInput<2>;
+template class FileInput<3>;
+template class FileInput<4>;
+template class FileInput<5>;
+template class FileInput<6>;
+template class FileInput<7>;
+
 template class ArrayInputLogger<double, 2>;
 template class ArrayInputLogger<double, 3>;
 template class ArrayInputLogger<double, 4>;

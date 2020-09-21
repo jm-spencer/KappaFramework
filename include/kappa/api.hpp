@@ -3,6 +3,7 @@
 #include "kappa/controller/abstractController.hpp"
 #include "kappa/controller/abstractSubController.hpp"
 
+#include "kappa/input/impl/fileInput.hpp"
 #include "kappa/input/impl/imuInput.hpp"
 #include "kappa/input/impl/okapiInput.hpp"
 #include "kappa/input/impl/timeInput.hpp"
