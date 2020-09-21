@@ -1,4 +1,5 @@
 #include "kappa/input/impl/imuInput.hpp"
+#include "api.h"
 
 namespace kappa {
 
@@ -15,6 +16,7 @@ std::shared_ptr<pros::Imu> ImuInput::getInput() const {
 
 const double &ImuInput::get() {
   value = coef * input->get_rotation();
+  if (value == PROS_ERR_F) value = 0;
   return value;
 }
 

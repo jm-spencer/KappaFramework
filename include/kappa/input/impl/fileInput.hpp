@@ -4,7 +4,6 @@
 #include <fstream>
 #include <array>
 #include <string>
-#include <memory>
 #include <iostream>
 
 namespace kappa {
@@ -20,18 +19,23 @@ public:
   FileInput(const std::string &filename):
     file(filename){}
 
-  virtual const std::array<double,N> &get() override{
-    std::getline(file, line, '\n');
+  virtual const std::array<double,N> &get() override {
+    if(!finished) {
+      std::getline(file, line, '\n');
 
-    index = 0;
-    step = 0;
+      index = 0;
+      step = 0;
 
-    for(std::size_t i = 0; i < N; i++){
-      value[i] = std::stod(line.substr(index), &step);
-      index += (step + 1);
+      try{
+        for(std::size_t i = 0; i < N; i++){
+          value[i] = std::stod(line.substr(index), &step);
+          index += (step + 1);
+        }
+      }catch(...){ // Will catch if there is no remaining valid doubles - assumes end of file
+        finished = true;
+        value.fill(0);
+      }
     }
-
-    std::cout << std::endl;
 
     return value;
   }
@@ -45,6 +49,7 @@ protected:
   std::string line;
   std::array<double,N> value{0};
   std::size_t index, step;
+  bool finished{false};
 };
 
 extern template class FileInput<1>;
