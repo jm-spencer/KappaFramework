@@ -19,11 +19,11 @@ public:
   TupleOutputLogger(std::shared_ptr<AbstractOutput<std::tuple<T...>>> ioutput = std::make_shared<NullOutput<std::tuple<T...>>>()):
     TupleOutputLogger(6, ", ", ", ", "\n", std::cout, ioutput) {}
 
-  TupleOutputLogger(int iprecision, std::string iprefix, std::string iseperator, std::string ipostfix, std::shared_ptr<AbstractOutput<std::tuple<T...>>> ioutput = std::make_shared<NullOutput<std::tuple<T...>>>()):
-    TupleOutputLogger(iprecision, iprefix, iseperator, ipostfix, std::cout, ioutput) {}
+  TupleOutputLogger(int iprecision, std::string iprefix, std::string iseparator, std::string ipostfix, std::shared_ptr<AbstractOutput<std::tuple<T...>>> ioutput = std::make_shared<NullOutput<std::tuple<T...>>>()):
+    TupleOutputLogger(iprecision, iprefix, iseparator, ipostfix, std::cout, ioutput) {}
 
-  TupleOutputLogger(int iprecision, std::string iprefix, std::string iseperator, std::string ipostfix, std::ostream &iout, std::shared_ptr<AbstractOutput<std::tuple<T...>>> ioutput = std::make_shared<NullOutput<std::tuple<T...>>>()):
-    output(ioutput), prefix(iprefix), seperator(iseperator), postfix(ipostfix), out(iout) {
+  TupleOutputLogger(int iprecision, std::string iprefix, std::string iseparator, std::string ipostfix, std::ostream &iout, std::shared_ptr<AbstractOutput<std::tuple<T...>>> ioutput = std::make_shared<NullOutput<std::tuple<T...>>>()):
+    output(ioutput), prefix(iprefix), separator(iseparator), postfix(ipostfix), out(iout) {
 
     out << std::setprecision(iprecision);
   }
@@ -31,7 +31,7 @@ public:
   virtual void set(const std::tuple<T...> &itarget) override {
     out << pros::millis() << prefix;
 
-    printTuple(itarget, out, seperator);
+    printTuple(itarget, out, separator);
 
     out << postfix;
 
@@ -46,7 +46,7 @@ protected:
   std::shared_ptr<AbstractOutput<std::tuple<T...>>> output{nullptr};
 
   std::string prefix;
-  std::string seperator;
+  std::string separator;
   std::string postfix;
 
   std::ostream &out;

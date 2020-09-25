@@ -18,11 +18,11 @@ public:
   TupleInputLogger(std::shared_ptr<AbstractInput<std::tuple<T...>>> iinput):
     TupleInputLogger(6, ", ", ", ", "\n", std::cout, iinput) {}
 
-  TupleInputLogger(int iprecision, std::string iprefix, std::string iseperator, std::string ipostfix, std::shared_ptr<AbstractInput<std::tuple<T...>>> iinput):
-    TupleInputLogger(iprecision, iprefix, iseperator, ipostfix, std::cout, iinput) {}
+  TupleInputLogger(int iprecision, std::string iprefix, std::string iseparator, std::string ipostfix, std::shared_ptr<AbstractInput<std::tuple<T...>>> iinput):
+    TupleInputLogger(iprecision, iprefix, iseparator, ipostfix, std::cout, iinput) {}
 
-  TupleInputLogger(int iprecision, std::string iprefix, std::string iseperator, std::string ipostfix, std::ostream &iout, std::shared_ptr<AbstractInput<std::tuple<T...>>> iinput):
-    input(iinput), prefix(iprefix), seperator(iseperator), postfix(ipostfix), out(iout) {
+  TupleInputLogger(int iprecision, std::string iprefix, std::string iseparator, std::string ipostfix, std::ostream &iout, std::shared_ptr<AbstractInput<std::tuple<T...>>> iinput):
+    input(iinput), prefix(iprefix), separator(iseparator), postfix(ipostfix), out(iout) {
 
     out << std::setprecision(iprecision);
   }
@@ -32,7 +32,7 @@ public:
 
     out << pros::millis() << prefix;
 
-    printTuple(values, out, seperator);
+    printTuple(values, out, separator);
 
     out << postfix;
 
@@ -47,7 +47,7 @@ protected:
   std::shared_ptr<AbstractInput<std::tuple<T...>>> input{nullptr};
 
   std::string prefix;
-  std::string seperator;
+  std::string separator;
   std::string postfix;
 
   std::ostream &out;

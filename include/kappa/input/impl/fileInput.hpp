@@ -14,7 +14,7 @@ namespace kappa {
  */
 
 template <std::size_t N>
-class FileInput : SimpleInput<std::array<double,N>> {
+class FileInput : public SimpleInput<std::array<double,N>> {
 public:
   FileInput(const std::string &filename):
     file(filename){}

@@ -8,13 +8,13 @@
 
 template<std::size_t I = 0, typename... Tp>
 inline typename std::enable_if<I == sizeof...(Tp) - 1, void>::type
-printTuple(const std::tuple<Tp...> &t, std::ostream &iout, const std::string &seperator) {
+printTuple(const std::tuple<Tp...> &t, std::ostream &iout, const std::string &separator) {
   iout << std::get<I>(t);
 }
 
 template<std::size_t I = 0, typename... Tp>
 inline typename std::enable_if<I < sizeof...(Tp) - 1, void>::type
-printTuple(const std::tuple<Tp...> &t, std::ostream &iout, const std::string &seperator) {
-  iout << std::get<I>(t) << seperator;
-  printTuple<I + 1, Tp...>(t, iout, seperator);
+printTuple(const std::tuple<Tp...> &t, std::ostream &iout, const std::string &separator) {
+  iout << std::get<I>(t) << separator;
+  printTuple<I + 1, Tp...>(t, iout, separator);
 }

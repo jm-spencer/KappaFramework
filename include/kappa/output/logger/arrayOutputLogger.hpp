@@ -18,11 +18,11 @@ public:
   ArrayOutputLogger(std::shared_ptr<AbstractOutput<std::array<T,N>>> ioutput = std::make_shared<NullOutput<std::array<T,N>>>()):
     ArrayOutputLogger(6, " ", " ", "\n", std::cout, ioutput) {}
 
-  ArrayOutputLogger(int iprecision, std::string iprefix, std::string iseperator, std::string ipostfix, std::shared_ptr<AbstractOutput<std::array<T,N>>> ioutput = std::make_shared<NullOutput<std::array<T,N>>>()):
-    ArrayOutputLogger(iprecision, iprefix, iseperator, ipostfix, std::cout, ioutput) {}
+  ArrayOutputLogger(int iprecision, std::string iprefix, std::string iseparator, std::string ipostfix, std::shared_ptr<AbstractOutput<std::array<T,N>>> ioutput = std::make_shared<NullOutput<std::array<T,N>>>()):
+    ArrayOutputLogger(iprecision, iprefix, iseparator, ipostfix, std::cout, ioutput) {}
 
-  ArrayOutputLogger(int iprecision, std::string iprefix, std::string iseperator, std::string ipostfix, std::ostream &iout, std::shared_ptr<AbstractOutput<std::array<T,N>>> ioutput = std::make_shared<NullOutput<std::array<T,N>>>()):
-    output(ioutput), prefix(iprefix), seperator(iseperator), postfix(ipostfix), out(iout) {
+  ArrayOutputLogger(int iprecision, std::string iprefix, std::string iseparator, std::string ipostfix, std::ostream &iout, std::shared_ptr<AbstractOutput<std::array<T,N>>> ioutput = std::make_shared<NullOutput<std::array<T,N>>>()):
+    output(ioutput), prefix(iprefix), separator(iseparator), postfix(ipostfix), out(iout) {
 
     out << std::setprecision(iprecision);
   }
@@ -31,7 +31,7 @@ public:
     out << pros::millis() << prefix << itarget[0];
 
     for(std::size_t i = 1; i < N; i++){
-      out << seperator << itarget[i];
+      out << separator << itarget[i];
     }
 
     out << postfix;
@@ -47,7 +47,7 @@ protected:
   std::shared_ptr<AbstractOutput<std::array<T,N>>> output{nullptr};
 
   std::string prefix;
-  std::string seperator;
+  std::string separator;
   std::string postfix;
 
   std::ostream &out;
