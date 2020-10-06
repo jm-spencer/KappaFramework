@@ -5,6 +5,7 @@
 
 #include "kappa/input/impl/binFileInput.hpp"
 #include "kappa/input/impl/fileInput.hpp"
+#include "kappa/input/impl/functionInput.hpp"
 #include "kappa/input/impl/imuInput.hpp"
 #include "kappa/input/impl/okapiInput.hpp"
 #include "kappa/input/impl/timeInput.hpp"
@@ -20,6 +21,7 @@
 #include "kappa/input/computationalInput.hpp"
 #include "kappa/input/simpleInput.hpp"
 
+#include "kappa/output/impl/functionOutput.hpp"
 #include "kappa/output/impl/nullOutput.hpp"
 #include "kappa/output/impl/threeAxisChassis.hpp"
 #include "kappa/output/impl/twoAxisChassis.hpp"

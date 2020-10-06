@@ -138,7 +138,7 @@ void opcontrol() {
   // wait for the imu to calibrate
   pros::delay(2000);
 
-  // All of these parts are run in a seperate task
+  // All of these parts can be run in a seperate task
   pros::Task testController([&] {
     std::uint32_t now = pros::millis();
     std::tuple<double,double> target = {50,0};
