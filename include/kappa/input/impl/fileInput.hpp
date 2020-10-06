@@ -19,6 +19,10 @@ public:
   FileInput(const std::string &filename):
     file(filename){}
 
+  ~FileInput() {
+    file.close();
+  }
+
   virtual const std::array<double,N> &get() override {
     if(!finished) {
       std::getline(file, line, '\n');
@@ -33,7 +37,6 @@ public:
         }
       }catch(...){ // Will catch if there is no remaining valid doubles - assumes end of file
         finished = true;
-        value.fill(0);
       }
     }
 
