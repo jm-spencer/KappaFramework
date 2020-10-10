@@ -16,16 +16,13 @@ template <typename... T>
 class TupleInputLogger : public AbstractInput<std::tuple<T...>> {
 public:
   TupleInputLogger(std::shared_ptr<AbstractInput<std::tuple<T...>>> iinput):
-    TupleInputLogger(6, ", ", ", ", "\n", std::cout, iinput) {}
+    TupleInputLogger(", ", ", ", "\n", std::cout, iinput) {}
 
-  TupleInputLogger(int iprecision, std::string iprefix, std::string iseparator, std::string ipostfix, std::shared_ptr<AbstractInput<std::tuple<T...>>> iinput):
-    TupleInputLogger(iprecision, iprefix, iseparator, ipostfix, std::cout, iinput) {}
+  TupleInputLogger(std::string iprefix, std::string iseparator, std::string ipostfix, std::shared_ptr<AbstractInput<std::tuple<T...>>> iinput):
+    TupleInputLogger(prefix, iseparator, ipostfix, std::cout, iinput) {}
 
-  TupleInputLogger(int iprecision, std::string iprefix, std::string iseparator, std::string ipostfix, std::ostream &iout, std::shared_ptr<AbstractInput<std::tuple<T...>>> iinput):
-    input(iinput), prefix(iprefix), separator(iseparator), postfix(ipostfix), out(iout) {
-
-    out << std::setprecision(iprecision);
-  }
+  TupleInputLogger(std::string iprefix, std::string iseparator, std::string ipostfix, std::ostream &iout, std::shared_ptr<AbstractInput<std::tuple<T...>>> iinput):
+    input(iinput), prefix(iprefix), separator(iseparator), postfix(ipostfix), out(iout) {}
 
   virtual const std::tuple<T...> &get() override {
     const std::tuple<T...> &values = input->get();

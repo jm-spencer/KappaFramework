@@ -20,6 +20,12 @@ std::shared_ptr<kappa::PidController> controller;
 std::shared_ptr<kappa::ArrayInputLogger<double,3>> testInput;
 
 void opcontrol() {
+
+  // I personally like these settings, show 6 digits for everything logged,
+  // and add zeros if there aren't 6 digits (so everything more or less aligns)
+  std::cout.setf(std::ios::fixed);
+  std::cout << std::setprecision(6);
+
   // LVGL stuff. Read up on the docs for more information and customization.
   // Pretty much everything is set to defaults in this project
   auto chart = lv_chart_create(lv_scr_act(), NULL);
@@ -45,13 +51,13 @@ void opcontrol() {
   // the first term is for a linear velocity command, and the second for angular (turing) velocity
   chassis =
     // Log both target values to cout (by default, can be change to any ostream)
-    std::make_shared<kappa::TupleOutputLogger<double,double>>(6, " Tuple Logger ", " | ", "\n",
+    std::make_shared<kappa::TupleOutputLogger<double,double>>(" Tuple Logger ", " | ", "\n",
       // Convert from linear/angular targets to left/right targets using chassis constants
       std::make_shared<kappa::TwoAxisChassis>(4, 10,
         // Ensure targets are within the bounds of the motors while preserving ratio between targets
         std::make_shared<kappa::ArrayOutputClamp<double,2>>(-100, 100,
           // Log both target values to cout (by default)
-          std::make_shared<kappa::ArrayOutputLogger<double,2>>(6, " Array Logger ", " | ", "\n",
+          std::make_shared<kappa::ArrayOutputLogger<double,2>>(" Array Logger ", " | ", "\n",
             // Split the target values into seperate "control trees"
             std::make_shared<kappa::ArrayDistributor<double,2>>(std::initializer_list<std::shared_ptr<kappa::AbstractOutput<double>>>{
               // Branch 1, left: Log the target velocity to the lvgl chart
@@ -68,7 +74,7 @@ void opcontrol() {
                     )
                   ),
                   // Output for the VPID controller. Logs the voltage command to cout
-                  std::make_shared<kappa::OutputLogger<double>>(6, " M1 ", "\n",
+                  std::make_shared<kappa::OutputLogger<double>>(" M1 ", "\n",
                     // Wrapper on okapi's AbstractMotor
                     std::make_shared<kappa::VoltageMotor>(std::make_shared<okapi::Motor>(19))
                   )
@@ -88,7 +94,7 @@ void opcontrol() {
                     )
                   ),
                   // Output for the VPID controller. Logs the voltage command to cout
-                  std::make_shared<kappa::OutputLogger<double>>(6, " M2 ", "\n",
+                  std::make_shared<kappa::OutputLogger<double>>(" M2 ", "\n",
                   // Wrapper on okapi's AbstractMotor
                     std::make_shared<kappa::VoltageMotor>(std::make_shared<okapi::Motor>(20))
                   )
@@ -104,7 +110,7 @@ void opcontrol() {
   // note: data flows from right to left in inputs
   input =
     // Log the encoder reading to cout
-    std::make_shared<kappa::InputLogger<double>>(6, " Input Logger ", "\n",
+    std::make_shared<kappa::InputLogger<double>>(" Input Logger ", "\n",
       // Log the encoder reading to an lvgl gauge
       std::make_shared<kappa::InputGaugeLogger<double>>(gauge, 0,
         // Wrapper on okapi's ContinuousRotarySensor
@@ -123,7 +129,7 @@ void opcontrol() {
   // single array input. Expect to see this used in odometry in a later release.
   testInput =
     // Log values to cout
-    std::make_shared<kappa::ArrayInputLogger<double,3>>(6, " Test InputArray ", " | ", "\n",
+    std::make_shared<kappa::ArrayInputLogger<double,3>>(" Test InputArray ", " | ", "\n",
       // Merge three inputs into a single arrayInput
       std::make_shared<kappa::ArrayConsolidator<double,3>>(std::initializer_list<std::shared_ptr<kappa::AbstractInput<double>>>{
         // An encoder

@@ -14,16 +14,13 @@ template <typename T>
 class InputLogger : public AbstractInput<T> {
 public:
   InputLogger(std::shared_ptr<AbstractInput<T>> iinput):
-    InputLogger(6, " ", "\n", std::cout, iinput) {}
+    InputLogger(" ", "\n", std::cout, iinput) {}
 
-  InputLogger(int iprecision, std::string iprefix, std::string ipostfix, std::shared_ptr<AbstractInput<T>> iinput):
-    InputLogger(iprecision, iprefix, ipostfix, std::cout, iinput) {}
+  InputLogger(std::string iprefix, std::string ipostfix, std::shared_ptr<AbstractInput<T>> iinput):
+    InputLogger(iprefix, ipostfix, std::cout, iinput) {}
 
-  InputLogger(int iprecision, std::string iprefix, std::string ipostfix, std::ostream &iout, std::shared_ptr<AbstractInput<T>> iinput):
-    input(iinput), prefix(iprefix), postfix(ipostfix), out(iout) {
-
-    out << std::setprecision(iprecision);
-  }
+  InputLogger(std::string iprefix, std::string ipostfix, std::ostream &iout, std::shared_ptr<AbstractInput<T>> iinput):
+    input(iinput), prefix(iprefix), postfix(ipostfix), out(iout) {}
 
   virtual const T &get() override {
     const T &value = input->get();

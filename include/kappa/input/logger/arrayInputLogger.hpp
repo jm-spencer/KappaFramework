@@ -15,16 +15,13 @@ template <typename T, std::size_t N>
 class ArrayInputLogger : public AbstractInput<std::array<T,N>> {
 public:
   ArrayInputLogger(std::shared_ptr<AbstractInput<std::array<T,N>>> iinput):
-    ArrayInputLogger(6, " ", " ", "\n", std::cout, iinput) {}
+    ArrayInputLogger(" ", " ", "\n", std::cout, iinput) {}
 
-  ArrayInputLogger(int iprecision, std::string iprefix, std::string iseparator, std::string ipostfix, std::shared_ptr<AbstractInput<std::array<T,N>>> iinput):
-    ArrayInputLogger(iprecision, iprefix, iseparator, ipostfix, std::cout, iinput) {}
+  ArrayInputLogger(std::string iprefix, std::string iseparator, std::string ipostfix, std::shared_ptr<AbstractInput<std::array<T,N>>> iinput):
+    ArrayInputLogger(iprefix, iseparator, ipostfix, std::cout, iinput) {}
 
-  ArrayInputLogger(int iprecision, std::string iprefix, std::string iseparator, std::string ipostfix, std::ostream &iout, std::shared_ptr<AbstractInput<std::array<T,N>>> iinput):
-    input(iinput), prefix(iprefix), separator(iseparator), postfix(ipostfix), out(iout) {
-
-    out << std::setprecision(iprecision);
-  }
+  ArrayInputLogger(std::string iprefix, std::string iseparator, std::string ipostfix, std::ostream &iout, std::shared_ptr<AbstractInput<std::array<T,N>>> iinput):
+    input(iinput), prefix(iprefix), separator(iseparator), postfix(ipostfix), out(iout) {}
 
   virtual const std::array<T,N> &get() override {
     const std::array<T,N> &values = input->get();

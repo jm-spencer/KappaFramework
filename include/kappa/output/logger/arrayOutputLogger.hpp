@@ -16,16 +16,13 @@ template <typename T, std::size_t N>
 class ArrayOutputLogger : public AbstractOutput<std::array<T,N>> {
 public:
   ArrayOutputLogger(std::shared_ptr<AbstractOutput<std::array<T,N>>> ioutput = std::make_shared<NullOutput<std::array<T,N>>>()):
-    ArrayOutputLogger(6, " ", " ", "\n", std::cout, ioutput) {}
+    ArrayOutputLogger(" ", " ", "\n", std::cout, ioutput) {}
 
-  ArrayOutputLogger(int iprecision, std::string iprefix, std::string iseparator, std::string ipostfix, std::shared_ptr<AbstractOutput<std::array<T,N>>> ioutput = std::make_shared<NullOutput<std::array<T,N>>>()):
-    ArrayOutputLogger(iprecision, iprefix, iseparator, ipostfix, std::cout, ioutput) {}
+  ArrayOutputLogger(std::string iprefix, std::string iseparator, std::string ipostfix, std::shared_ptr<AbstractOutput<std::array<T,N>>> ioutput = std::make_shared<NullOutput<std::array<T,N>>>()):
+    ArrayOutputLogger(iprefix, iseparator, ipostfix, std::cout, ioutput) {}
 
-  ArrayOutputLogger(int iprecision, std::string iprefix, std::string iseparator, std::string ipostfix, std::ostream &iout, std::shared_ptr<AbstractOutput<std::array<T,N>>> ioutput = std::make_shared<NullOutput<std::array<T,N>>>()):
-    output(ioutput), prefix(iprefix), separator(iseparator), postfix(ipostfix), out(iout) {
-
-    out << std::setprecision(iprecision);
-  }
+  ArrayOutputLogger(std::string iprefix, std::string iseparator, std::string ipostfix, std::ostream &iout, std::shared_ptr<AbstractOutput<std::array<T,N>>> ioutput = std::make_shared<NullOutput<std::array<T,N>>>()):
+    output(ioutput), prefix(iprefix), separator(iseparator), postfix(ipostfix), out(iout) {}
 
   virtual void set(const std::array<T,N> &itarget) override {
     out << pros::millis() << prefix << itarget[0];
