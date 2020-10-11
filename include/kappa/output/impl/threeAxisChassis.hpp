@@ -12,7 +12,7 @@ public:
 
   /**
    * Chassis object for a chassis with 3 degrees of freedom (holonomic)
-   * Converts an input signal of (forward, left, ccw)
+   * Converts an target signal of (forward, left, ccw)
    * to an signal of (frontLeft, backLeft, backRight, frontRight)
    * for an X-drive like chassis
    *
@@ -22,7 +22,7 @@ public:
 
   /**
    * Chassis object for a chassis with 3 degrees of freedom (holonomic)
-   * Converts an input signal of (forward, left, ccw) in units of (in/s, in/s, rad/s)
+   * Converts an target signal of (forward, left, ccw) in units of (in/s, in/s, rad/s)
    * to an signal of (frontLeft, backLeft, backRight, frontRight) in units of rpm
    * for an X-drive like chassis
    *

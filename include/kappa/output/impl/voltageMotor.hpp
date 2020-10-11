@@ -18,7 +18,7 @@ public:
   VoltageMotor(std::shared_ptr<okapi::AbstractMotor> imotor);
 
   /**
-   * set voltage, in units of mV (-12000,12000), to the motor
+   * Set voltage, in units of mV (-12000,12000), to the motor
    *
    * @param itarget voltage
    */

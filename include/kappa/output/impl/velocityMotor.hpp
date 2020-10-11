@@ -18,7 +18,7 @@ public:
   VelocityMotor(std::shared_ptr<okapi::AbstractMotor> imotor);
 
   /**
-   * set target velocity, in units of rpm, to the integrated motor controller
+   * Set target velocity, in units of rpm, to the integrated motor controller
    *
    * @param itarget target value
    */
