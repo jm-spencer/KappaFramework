@@ -22,7 +22,7 @@ public:
     input(iinput), filter(std::move(ifilter)) {}
 
   /**
-   * Gets data from its input, logs it, and returns the data
+   * Gets data from its input, filters, and returns it
    *
    * @return input data
    */

@@ -38,7 +38,7 @@ public:
     input(iinput), filter(std::move(ifilter)), conversion(iconversion) {}
 
   /**
-   * Gets data from its input, logs it, and returns the data
+   * Gets data from its input, differentiates, and returns it
    *
    * @return input data
    */

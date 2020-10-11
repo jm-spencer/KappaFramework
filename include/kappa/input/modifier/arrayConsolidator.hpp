@@ -24,7 +24,7 @@ public:
   }
 
   /**
-   * Gets data from its input, logs it, and returns the data
+   * Gets data from its inputs, and returns array of data
    *
    * @return input data
    */
@@ -34,7 +34,7 @@ public:
     }
     return out;
   }
-  
+
   /**
    * Gets input source
    *
