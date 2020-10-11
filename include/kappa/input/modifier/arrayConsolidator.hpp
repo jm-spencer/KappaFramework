@@ -36,9 +36,9 @@ public:
   }
 
   /**
-   * Gets input source
+   * Gets input sources
    *
-   * @return input
+   * @return inputs
    */
   std::array<std::shared_ptr<AbstractInput<T>>,N> getInput() const {
     return input;
