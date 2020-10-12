@@ -144,30 +144,22 @@ void opcontrol() {
   // wait for the imu to calibrate
   pros::delay(2000);
 
-  // All of these parts can be run in a seperate task
-  pros::Task testController([&] {
-    std::uint32_t now = pros::millis();
-    std::tuple<double,double> target = {50,0};
+  std::uint32_t now = pros::millis();
+  std::tuple<double,double> target = {50,0};
 
-    // note that this controller doesn't actually do anything useful
-    // it is merely a demonstration of functionality
-    while (true) {
-      std::get<1>(target) = controller->step(input->get());
-      chassis->set(target);
+  // note that this controller doesn't actually do anything useful
+  // it is merely a demonstration of functionality
+  while (true) {
+    std::get<1>(target) = controller->step(input->get());
+    chassis->set(target);
 
-      std::cout << "\n";
+    std::cout << "\n";
 
-      testInput->get();
+    testInput->get();
 
-      std::cout << "\n";
+    std::cout << "\n";
 
-      pros::Task::delay_until(&now, 10);
-    }
-
-  }, "Test Controller");
-
-  while(true) {
-    pros::delay(10);
+    pros::Task::delay_until(&now, 10);
   }
 
 }

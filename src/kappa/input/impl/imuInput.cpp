@@ -4,7 +4,9 @@
 namespace kappa {
 
 ImuInput::ImuInput(const std::uint8_t port, bool ccw):
-  input(std::make_shared<pros::Imu>(port)), coef(ccw ? -1 : 1) {}
+  input(std::make_shared<pros::Imu>(port)), coef(ccw ? -1 : 1) {
+    calibrate();
+  }
 
 std::int32_t ImuInput::calibrate() const {
   return input->reset();

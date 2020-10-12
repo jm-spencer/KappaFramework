@@ -12,6 +12,7 @@ public:
 
   /**
    * Wrapper for an IMU
+   * Automatically starts calibration upon construction
    * 
    * @param port port on v5 brain
    * @param ccw if true, counts ccw rotation as positive, else cw rotation 
