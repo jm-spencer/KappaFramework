@@ -63,8 +63,8 @@ protected:
   std::unique_ptr<okapi::Filter> filter{nullptr};
   double conversion{0};
 
-  T lastValue{0};
-  T out{0};
+  T lastValue;
+  T out;
 };
 
 extern template class InputDifferentiator<double>;
