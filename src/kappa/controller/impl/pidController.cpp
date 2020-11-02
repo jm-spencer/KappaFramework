@@ -45,8 +45,10 @@ double PidController::step(double ireading) {
 
     return output;
   } else {
-    return 0;
+    output = 0;
   }
+
+  return output;
 }
 
 bool PidController::isSettled() {
