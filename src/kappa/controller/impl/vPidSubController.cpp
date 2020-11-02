@@ -32,7 +32,7 @@ VPidSubController::VPidSubController(Gains igains,
                                      std::unique_ptr<okapi::Filter> iderivativeFilter,
                                      std::shared_ptr<AbstractInput<double>> iinput,
                                      std::shared_ptr<AbstractOutput<double>> ioutput):
-                                     AbstractSubController(iinput, ioutput, ioutputMin, ioutputMax), gains(igains), derivativeFilter(std::move(iderivativeFilter)) {
+                                     AbstractSubController(iinput, ioutput), outputMin(ioutputMin), outputMax(ioutputMax), gains(igains), derivativeFilter(std::move(iderivativeFilter)) {
     reset();
 }
 
@@ -50,6 +50,19 @@ void VPidSubController::set(const double &itarget) {
     output = std::clamp(closedLoopSignal + target * gains.kF + sgn(target) * gains.kSF, outputMin, outputMax);
 
     outputDevice->set(output);
+}
+
+void VPidSubController::setOutputLimits(double imin, double imax) {
+  outputMin = imin;
+  outputMax = imax;
+}
+
+double VPidSubController::getMinOutput() const {
+  return outputMin;
+}
+
+double VPidSubController::getMaxOutput() const {
+  return outputMax;
 }
 
 void VPidSubController::reset() {

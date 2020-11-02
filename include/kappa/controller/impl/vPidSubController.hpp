@@ -75,8 +75,30 @@ public:
   virtual void set(const double &itarget) override;
 
   /**
+   * Set the output limits that the output will be clamped between
+   *
+   * @param imin minimum output value
+   * @param imax maximum output value
+   */
+  virtual void setOutputLimits(double imin, double imax);
+
+  /**
+   * Get the minimum output limit
+   *
+   * @return minimum output value
+   */
+  virtual double getMinOutput() const;
+
+  /**
+   * Get the maximum output limit
+   *
+   * @return maximum output value
+   */
+  virtual double getMaxOutput() const;
+
+  /**
    * Resets the controller to behavior immediately after construction
-   * (like reseting "last iteration" values)
+   * (like resetting "last iteration" values)
    */
   virtual void reset() override;
 
@@ -88,6 +110,9 @@ protected:
 
   double lastError{0};
   double derivative{0};
+
+  double outputMax{DBL_MAX};
+  double outputMin{-DBL_MAX};
 
   double closedLoopSignal{0};
 };

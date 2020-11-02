@@ -51,6 +51,28 @@ public:
   virtual void setTarget(const double &itarget) override;
 
   /**
+   * Set the output limits that the output will be clamped between
+   *
+   * @param imin minimum output value
+   * @param imax maximum output value
+   */
+  virtual void setOutputLimits(double imin, double imax);
+
+  /**
+   * Get the minimum output limit
+   *
+   * @return minimum output value
+   */
+  virtual double getMinOutput() const;
+
+  /**
+   * Get the maximum output limit
+   *
+   * @return maximum output value
+   */
+  virtual double getMaxOutput() const;
+
+  /**
    * Iterates the controller
    *
    * @param ireading new sensor value
@@ -97,6 +119,9 @@ protected:
   Gains gains;
   std::unique_ptr<okapi::SettledUtil> settledUtil{nullptr};
   std::unique_ptr<okapi::Filter> derivativeFilter{nullptr};
+
+  double outputMax{DBL_MAX};
+  double outputMin{-DBL_MAX};
 
   double lastError{0};
   double integral{0};

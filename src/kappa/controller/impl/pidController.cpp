@@ -7,12 +7,25 @@ PidController::PidController(Gains igains, const okapi::TimeUtil &itimeUtil, std
   PidController(igains, -DBL_MAX, DBL_MAX, itimeUtil, std::move(iderivativeFilter)) {}
 
 PidController::PidController(Gains igains, double ioutputMin, double ioutputMax, const okapi::TimeUtil &itimeUtil, std::unique_ptr<okapi::Filter> iderivativeFilter):
-  AbstractController(ioutputMin, ioutputMax), gains(igains), settledUtil(itimeUtil.getSettledUtil()), derivativeFilter(std::move(iderivativeFilter)) {
+  outputMin(ioutputMin), outputMax(ioutputMax), gains(igains), settledUtil(itimeUtil.getSettledUtil()), derivativeFilter(std::move(iderivativeFilter)) {
     reset();
   }
 
 void PidController::setTarget(const double &itarget) {
   target = itarget;
+}
+
+void PidController::setOutputLimits(double imin, double imax) {
+  outputMin = imin;
+  outputMax = imax;
+}
+
+double PidController::getMinOutput() const {
+  return outputMin;
+}
+
+double PidController::getMaxOutput() const {
+  return outputMax;
 }
 
 double PidController::step(double ireading) {
