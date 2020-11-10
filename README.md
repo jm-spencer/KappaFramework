@@ -17,4 +17,4 @@ This software uses the MPL-2 License. See [LICENSE](LICENSE) for more informatio
 
 Example
 -------
-This directory (specifically [main.cpp](./main/opcontrol.cpp)) is a usage example. Feel free to dm me on discord @sufficient#0331 with any questions.
+This directory (specifically [main.cpp](./src/main.cpp)) is a usage example. Feel free to dm me on discord @sufficient#0331 with any questions.
