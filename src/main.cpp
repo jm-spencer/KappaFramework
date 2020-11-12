@@ -68,7 +68,7 @@ void opcontrol() {
                   // Feedback for the VPID controller. Log the actual velocity to the lvgl chart
                   std::make_shared<kappa::InputChartLogger<double>>(chart, read1,
                     // Differentiate the encoder values to calculate velocity
-                    std::make_shared<kappa::InputDifferentiator<double>>(20.0/3.0,
+                    std::make_shared<kappa::InputDifferentiator<double>>(200.0/3.0,
                       // Wrapper on okapi's ContinuousRotarySensor
                       std::make_shared<kappa::OkapiInput>(std::make_shared<okapi::IntegratedEncoder>(19))
                     )
@@ -88,7 +88,7 @@ void opcontrol() {
                   // Feedback for the VPID controller. Log the actual velocity to the lvgl chart
                   std::make_shared<kappa::InputChartLogger<double>>(chart, read2,
                     // Differentiate the encoder values to calculate velocity
-                    std::make_shared<kappa::InputDifferentiator<double>>(20.0/3.0,
+                    std::make_shared<kappa::InputDifferentiator<double>>(200.0/3.0,
                       // Wrapper on okapi's ContinuousRotarySensor
                       std::make_shared<kappa::OkapiInput>(std::make_shared<okapi::IntegratedEncoder>(20))
                     )
