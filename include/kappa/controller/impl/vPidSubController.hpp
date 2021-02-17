@@ -28,6 +28,7 @@ public:
   VPidSubController(Gains igains,
                     std::shared_ptr<AbstractInput<double>> iinput,
                     std::shared_ptr<AbstractOutput<double>> ioutput);
+                    
   /**
    * @param igains gains for the controller
    * @param iderivativeFilter filter for the derivative of the error

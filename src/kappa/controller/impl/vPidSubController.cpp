@@ -43,9 +43,10 @@ void VPidSubController::set(const double &itarget) {
     derivative = derivativeFilter->filter(error - lastError);
     lastError = error;
 
-    target = itarget;
+    closedLoopSignal += error * gains.kP + derivative * gains.kD;
+    closedLoopSignal = std::clamp(closedLoopSignal, outputMin, outputMax);
 
-    closedLoopSignal = std::clamp(error * gains.kP + derivative * gains.kD, outputMin, outputMax);
+    target = itarget;
 
     output = std::clamp(closedLoopSignal + target * gains.kF + sgn(target) * gains.kSF, outputMin, outputMax);
 

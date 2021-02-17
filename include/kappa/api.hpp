@@ -27,6 +27,7 @@
 #include "kappa/output/impl/twoAxisChassis.hpp"
 #include "kappa/output/impl/velocityMotor.hpp"
 #include "kappa/output/impl/voltageMotor.hpp"
+#include "kappa/output/impl/vpidMotor.hpp"
 #include "kappa/output/logger/arrayOutputLogger.hpp"
 #include "kappa/output/logger/outputChartLogger.hpp"
 #include "kappa/output/logger/outputGaugeLogger.hpp"

@@ -64,11 +64,11 @@ void opcontrol() {
               std::make_shared<kappa::OutputChartLogger<double>>(chart, targ1,
                 // Velocity PID controller. Takes in the velocity target from above
                 std::make_shared<kappa::VPidSubController>(
-                  kappa::VPidSubController::Gains{50,0,50,2000}, -12000, 12000,
+                  kappa::VPidSubController::Gains{60,50,50,620}, -12000, 12000,
                   // Feedback for the VPID controller. Log the actual velocity to the lvgl chart
                   std::make_shared<kappa::InputChartLogger<double>>(chart, read1,
                     // Differentiate the encoder values to calculate velocity
-                    std::make_shared<kappa::InputDifferentiator<double>>(200.0/3.0,
+                    std::make_shared<kappa::InputDifferentiator<double>>(KAPPA_GREEN_CONV,
                       // Wrapper on okapi's ContinuousRotarySensor
                       std::make_shared<kappa::OkapiInput>(std::make_shared<okapi::IntegratedEncoder>(19))
                     )
@@ -80,26 +80,11 @@ void opcontrol() {
                   )
                 )
               ),
-              // Branch 2, right: Log the target velocity to the lvgl chart
-              std::make_shared<kappa::OutputChartLogger<double>>(chart, targ2,
-                // Velocity PID controller. Takes in the velocity target from above
-                std::make_shared<kappa::VPidSubController>(
-                  kappa::VPidSubController::Gains{50,0,50,2000}, -12000, 12000,
-                  // Feedback for the VPID controller. Log the actual velocity to the lvgl chart
-                  std::make_shared<kappa::InputChartLogger<double>>(chart, read2,
-                    // Differentiate the encoder values to calculate velocity
-                    std::make_shared<kappa::InputDifferentiator<double>>(200.0/3.0,
-                      // Wrapper on okapi's ContinuousRotarySensor
-                      std::make_shared<kappa::OkapiInput>(std::make_shared<okapi::IntegratedEncoder>(20))
-                    )
-                  ),
-                  // Output for the VPID controller. Logs the voltage command to cout
-                  std::make_shared<kappa::OutputLogger<double>>(" M2 ", "\n",
-                  // Wrapper on okapi's AbstractMotor
-                    std::make_shared<kappa::VoltageMotor>(std::make_shared<okapi::Motor>(20))
-                  )
-                )
-              )
+              // Branch 2, right
+              // This is a shorthand for the above velocity PID controller (lines 66-82)
+              // for a given motor (Though it does not include the loggers)
+              // the negative port value reverses the direction of the motor
+              std::make_shared<kappa::VPidSubController>(kappa::makeVPIDMotor(-20, {60,50,50,620}))
             })
           )
         )
