@@ -23,7 +23,8 @@
 
 #include "kappa/output/impl/functionOutput.hpp"
 #include "kappa/output/impl/nullOutput.hpp"
-#include "kappa/output/impl/threeAxisChassis.hpp"
+#include "kappa/output/impl/mechanumChassis.hpp"
+#include "kappa/output/impl/xdriveChassis.hpp"
 #include "kappa/output/impl/twoAxisChassis.hpp"
 #include "kappa/output/impl/velocityMotor.hpp"
 #include "kappa/output/impl/voltageMotor.hpp"

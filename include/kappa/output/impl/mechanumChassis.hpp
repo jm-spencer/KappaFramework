@@ -7,18 +7,18 @@
 
 namespace kappa {
 
-class ThreeAxisChassis : public AbstractOutput<std::tuple<double,double,double>> {
+class MechanumChassis : public AbstractOutput<std::tuple<double,double,double>> {
 public:
 
   /**
    * Chassis object for a chassis with 3 degrees of freedom (holonomic)
    * Converts an target signal of (forward, left, ccw)
    * to an signal of (frontLeft, backLeft, backRight, frontRight)
-   * for an X-drive like chassis
+   * for an mechanum wheeled chassis
    *
    * @param ichassis array of motors in format (frontLeft, backLeft, backRight, frontRight)
    */
-  ThreeAxisChassis(std::shared_ptr<AbstractOutput<std::array<double,4>>> ichassis);
+  MechanumChassis(std::shared_ptr<AbstractOutput<std::array<double,4>>> ichassis);
 
   /**
    * Chassis object for a chassis with 3 degrees of freedom (holonomic)
@@ -27,11 +27,13 @@ public:
    * for an X-drive like chassis
    *
    * @param iwheelDiameter diameter of wheel in inches
-   * @param ichassisWidth distance between parallel wheels in inches
+   * @param iwheelDistance distance from center of robot to a wheel in inches
+   *    calculate with sqrt( (chassisWidth/2)^2 + (chassisLength/2)^2 )
+   *    higher values makes robot react more sensitive to turning commands
    * @param ichassis array of motors in format (frontLeft, backLeft, backRight, frontRight)
    */
 
-  ThreeAxisChassis(double iwheelDiameter, double ichassisWidth, std::shared_ptr<AbstractOutput<std::array<double,4>>> ichassis);
+  MechanumChassis(double iwheelDiameter, double iwheelDistance, std::shared_ptr<AbstractOutput<std::array<double,4>>> ichassis);
 
   /**
    * Calculates target values for each motor and sets their respective targets
