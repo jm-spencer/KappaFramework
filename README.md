@@ -1,5 +1,5 @@
 # KappaFramework
-C++ framework for Vex robots inspired by on [Okapilib](https://github.com/OkapiLib/OkapiLib), but designed for use only as a framework to be built upon by users.
+C++ framework for Vex robots inspired by [Okapilib](https://github.com/OkapiLib/OkapiLib), but designed for use as a modular framework, both with its own components, while being conducive to be built upon by users.
 
 This project was created with the intent of providing a modular interface for users to work with. All kappaframework objects are organized into Inputs, Outputs, and Controllers. Inputs get values from sensors and the like, Outputs send values to motors and the like, and Controllers act as a bridge between the two. Using polymorphism, Inputs and Outputs can wrap other Inputs and Outputs, creating a modular chain of control signals. This lets users create and implement their own modules with ease. Additionally, many utilities, such as loggers, are already availble within kappaframework.
 
