@@ -43,8 +43,14 @@ public:
    * @return input data
    */
   virtual const T &get() override {
+    int dT = pros::millis() - lastTime;
+
+    if(dT == 0){
+      return out;
+    }
+
     const T &value = input->get();
-    out = static_cast<T>(filter->filter(static_cast<double>((value - lastValue) / (pros::millis() - lastTime)) * conversion));
+    out = static_cast<T>(filter->filter(static_cast<double>((value - lastValue) * conversion / dT)));
     lastValue = value;
     lastTime = pros::millis();
     return out;
