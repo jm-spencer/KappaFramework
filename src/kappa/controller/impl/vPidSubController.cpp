@@ -53,6 +53,10 @@ void VPidSubController::set(const double &itarget) {
     outputDevice->set(output);
 }
 
+void VPidSubController::stop(){
+  outputDevice->stop();
+}
+
 void VPidSubController::setOutputLimits(double imin, double imax) {
   outputMin = imin;
   outputMax = imax;

@@ -20,6 +20,10 @@ void XDriveChassis::set(const std::tuple<double,double,double> &iTarget) {
                 forwardTarget + sidewaysTarget + rotationTarget});
 }
 
+void XDriveChassis::stop() {
+  chassis->stop();
+}
+
 void XDriveChassis::setPolar(const std::tuple<double,double,double> &iTarget) {
   set({std::get<0>(iTarget) * cos(std::get<1>(iTarget)), std::get<0>(iTarget) * sin(std::get<1>(iTarget)), std::get<2>(iTarget)});
 }

@@ -24,6 +24,10 @@ void MechanumChassis::set(const std::tuple<double,double,double> &iTarget) {
                 forwardTarget + sidewaysTarget + rotationTarget});
 }
 
+void MechanumChassis::stop() {
+  chassis->stop();
+}
+
 std::shared_ptr<AbstractOutput<std::array<double,4>>> MechanumChassis::getOutput() const {
   return chassis;
 }

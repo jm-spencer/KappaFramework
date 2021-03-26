@@ -9,6 +9,10 @@ void VoltageMotor::set(const double &iTarget) {
   motor->moveVoltage(iTarget);
 }
 
+void VoltageMotor::stop() {
+  motor->moveVoltage(0);
+}
+
 std::shared_ptr<okapi::AbstractMotor> VoltageMotor::getMotor() const {
   return motor;
 }

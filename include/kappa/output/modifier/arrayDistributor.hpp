@@ -35,6 +35,16 @@ public:
   }
 
   /**
+   * Send a stop command to each output
+   * eg. idle the motor, as opposed to trying to hold vel = 0
+   */
+  virtual void stop() override {
+    for(std::size_t i = 0; i < N; i++) {
+      output[i]->stop();
+    }
+  }
+
+  /**
    * Gets outputs
    *
    * @return outputs

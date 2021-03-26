@@ -20,6 +20,11 @@ public:
    */
   virtual void set(const T &itarget) override { }
 
+  /**
+   * Does nothing
+   */
+  virtual void stop() override { }
+
 };
 
 extern template class NullOutput<double>;

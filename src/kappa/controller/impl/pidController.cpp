@@ -15,6 +15,10 @@ void PidController::setTarget(const double &itarget) {
   target = itarget;
 }
 
+void PidController::stop(){
+  output = 0;
+}
+
 void PidController::setOutputLimits(double imin, double imax) {
   outputMin = imin;
   outputMax = imax;
@@ -43,12 +47,11 @@ double PidController::step(double ireading) {
 
     settledUtil->isSettled(error);
 
-    return output;
   } else {
     output = 0;
   }
 
-  return output;
+  return std::clamp(output, outputMin, outputMax);
 }
 
 bool PidController::isSettled() {

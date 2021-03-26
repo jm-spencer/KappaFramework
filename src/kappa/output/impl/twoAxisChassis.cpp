@@ -17,6 +17,10 @@ void TwoAxisChassis::set(const std::tuple<double,double> &iTarget) {
                 linearTarget + rotationTarget});
 }
 
+void TwoAxisChassis::stop(){
+  chassis->stop();
+}
+
 std::shared_ptr<AbstractOutput<std::array<double,2>>> TwoAxisChassis::getOutput() const {
   return chassis;
 }
