@@ -51,6 +51,12 @@ public:
   virtual void setTarget(const double &itarget) override;
 
   /**
+   * sets output to 0. Not particularly useful in this implementation.
+   * Use disable() instead.
+   */
+  virtual void stop() override;
+
+  /**
    * Set the output limits that the output will be clamped between
    *
    * @param imin minimum output value
